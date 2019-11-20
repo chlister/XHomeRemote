@@ -7,6 +7,6 @@
  */
 package com.xpower.xhomeremote.presenter;
 
-public interface ISocketPresenter {
+public interface ISocketPresenter{
     void getSockets();
 }

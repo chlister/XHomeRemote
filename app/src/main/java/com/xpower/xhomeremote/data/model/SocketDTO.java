@@ -20,6 +20,7 @@ public class SocketDTO {
         this.agentId = agentId;
         this.name = name;
         this.type = type;
+
     }
 
     @Override

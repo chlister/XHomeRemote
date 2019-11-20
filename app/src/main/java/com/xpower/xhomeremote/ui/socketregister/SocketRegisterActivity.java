@@ -17,7 +17,7 @@ public class SocketRegisterActivity extends BaseActivity {
      * @author  Martin J. J.
      * @version 1.0
      * @since   11/20/2019
-     * @status  Ready for review
+     * @status  Under Development
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {

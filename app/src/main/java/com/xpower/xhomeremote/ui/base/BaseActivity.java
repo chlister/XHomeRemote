@@ -24,7 +24,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
      * @author  Martin J. J.
      * @version 1.0
      * @since   11/20/2019
-     * @status  Ready for review
+     * @status  Under Development
      */
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,7 +37,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
      * @author  Martin J. J.
      * @version 1.0
      * @since   11/20/2019
-     * @status  Ready for review
+     * @status  Under Development
      */
     @Override
     public void showLoading() {
@@ -53,7 +53,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
      * @author  Martin J. J.
      * @version 1.0
      * @since   11/20/2019
-     * @status  Ready for review
+     * @status  Under Development
      */
     @Override
     public void hideLoading() {
@@ -67,7 +67,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
      * @author  Martin J. J.
      * @version 1.0
      * @since   11/20/2019
-     * @status  Ready for review
+     * @status  Under Development
      */
     @Override
     public void showMessage(String message) {
@@ -81,7 +81,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
      * @author  Martin J. J.
      * @version 1.0
      * @since   11/20/2019
-     * @status  Ready for review
+     * @status  Under Development
      */
     @Override
     public void showMessage(@StringRes int resId) {

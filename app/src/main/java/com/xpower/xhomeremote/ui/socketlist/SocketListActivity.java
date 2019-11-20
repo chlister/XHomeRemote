@@ -1,5 +1,5 @@
 /**
- *   TODO: Add class description
+ * Activity for view the presents a list of sockets
  * @author  Martin J. J.
  * @version 1.0
  * @since   11/20/2019

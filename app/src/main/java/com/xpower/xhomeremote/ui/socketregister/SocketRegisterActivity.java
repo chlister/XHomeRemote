@@ -1,5 +1,5 @@
 /**
- *   TODO: Add class description
+ * Activity for view that presents the Socket register
  * @author  Martin J. J.
  * @version 1.0
  * @since   11/20/2019

@@ -15,6 +15,13 @@ public class SocketDTO {
     public String name;
     public HomeApplianceType type;
 
+    public SocketDTO(int id, int agentId, String name, HomeApplianceType type) {
+        this.id = id;
+        this.agentId = agentId;
+        this.name = name;
+        this.type = type;
+    }
+
     @Override
     public String toString() {
         return "SocketDTO{" +

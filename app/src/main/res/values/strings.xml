@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">XHomeRemote</string>
     <string name="please_wait">Please wait</string>
+    <string name="socketcard_type">Type:</string>
+    <string name="socketcard_socketId">Socket ID:</string>
+    <string name="socketcard_agentId">Agent ID:</string>
+    <string name="not_registered">Not Registered</string>
 </resources>

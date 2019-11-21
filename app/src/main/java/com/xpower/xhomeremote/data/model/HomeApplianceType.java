@@ -8,6 +8,8 @@
 package com.xpower.xhomeremote.data.model;
 
 public enum HomeApplianceType {
+    NON,
+    OTHER,
     COFFEE_MACHINE,
     LAPTOP,
     LIGHT

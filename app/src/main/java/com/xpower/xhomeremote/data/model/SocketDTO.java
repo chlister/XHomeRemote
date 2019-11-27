@@ -8,8 +8,9 @@
 package com.xpower.xhomeremote.data.model;
 
 
+import java.io.Serializable;
 
-public class SocketDTO {
+public class SocketDTO implements Serializable {
     public int id;
     public int agentId;
     public String name;

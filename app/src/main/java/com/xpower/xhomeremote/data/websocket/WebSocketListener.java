@@ -5,10 +5,14 @@
  * @version 1.0
  * @since 11/20/2019
  */
-package com.xpower.xhomeremote.data.socket;
+package com.xpower.xhomeremote.data.websocket;
+
+import android.util.Log;
 
 import okhttp3.Response;
 import okhttp3.WebSocket;
+
+import static android.content.ContentValues.TAG;
 
 public final class WebSocketListener extends okhttp3.WebSocketListener {
     private IWebSocketCallback callback;
@@ -32,6 +36,8 @@ public final class WebSocketListener extends okhttp3.WebSocketListener {
     @Override
     public void onOpen(WebSocket webSocket, Response response) {
         super.onOpen(webSocket, response);
+        Log.i(TAG, "onOpen: " + response.message());
+        callback.connectEstablis(webSocket);
     }
 
     /**
@@ -43,6 +49,7 @@ public final class WebSocketListener extends okhttp3.WebSocketListener {
     @Override
     public void onMessage(WebSocket webSocket, String text) {
         super.onMessage(webSocket, text);
+        Log.i(TAG, "onMessage: " + text);
     }
 
     /**
@@ -59,5 +66,6 @@ public final class WebSocketListener extends okhttp3.WebSocketListener {
     @Override
     public void onFailure(WebSocket webSocket, Throwable t, Response response) {
         super.onFailure(webSocket, t, response);
+
     }
 }

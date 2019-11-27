@@ -5,29 +5,32 @@
  * @version 1.0
  * @since 11/20/2019
  */
-package com.xpower.xhomeremote.presenter;
+package com.xpower.xhomeremote.presenter.socketlist;
 
-import com.xpower.xhomeremote.data.DataManager;
 import com.xpower.xhomeremote.data.model.SocketDTO;
-import com.xpower.xhomeremote.data.socket.IWebSocketCallback;
+import com.xpower.xhomeremote.data.websocket.IWebSocketManager;
+import com.xpower.xhomeremote.data.websocket.WebSocketManager;
 import com.xpower.xhomeremote.ui.socketlist.ISocketListView;
 
 import java.util.List;
 
 public class SocketPresenter implements ISocketPresenter, ISocketPresenterCallback {
     private ISocketListView mView;
-    private DataManager mDataManager;
+    private IWebSocketManager mWebSocketManager;
 
     /**
      * @author  Martin J. J.
      * @version 1.0
      * @since   11/20/2019
-     * @status  Under Development
+     * @status  Ready for review
      */
     public SocketPresenter(ISocketListView view){
         mView = view;
-        mDataManager = DataManager.getInstance(this);
-        mDataManager.startSocketConnection();
+        mWebSocketManager = WebSocketManager.getInstance();
+        mWebSocketManager.setSuccesCallback(this);
+        mWebSocketManager.setFailedCallback(this);
+        mWebSocketManager.setReceiveSocketCallback(this);
+        mWebSocketManager.startSocketConnection();
     }
 
     /**
@@ -38,7 +41,7 @@ public class SocketPresenter implements ISocketPresenter, ISocketPresenterCallba
      */
     @Override
     public void getSockets() {
-
+        mWebSocketManager.getSockets();
     }
 
     /**
@@ -60,6 +63,11 @@ public class SocketPresenter implements ISocketPresenter, ISocketPresenterCallba
      */
     @Override
     public void websocketConnectionFailed() {
+        mView.ConnectionFeedback(false);
+    }
 
+    @Override
+    public void websocketConnectionSucces() {
+        mView.ConnectionFeedback(true);
     }
 }

@@ -1,10 +1,9 @@
-package com.xpower.xhomeremote.presenter;
+package com.xpower.xhomeremote.data.websocket.callback;
 
 import com.xpower.xhomeremote.data.model.SocketDTO;
 
 import java.util.List;
 
-public interface ISocketPresenterCallback {
+public interface IWebsocketReceiveSockets {
     void receiveSockets(List<SocketDTO> sockets);
-    void websocketConnectionFailed();
 }

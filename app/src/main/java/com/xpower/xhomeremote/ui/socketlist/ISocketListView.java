@@ -13,4 +13,5 @@ import java.util.List;
 
 public interface ISocketListView {
     void updateSocketList(List<SocketDTO> sockets);
+    void ConnectionFeedback(boolean b);
 }

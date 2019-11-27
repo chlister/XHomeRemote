@@ -2,8 +2,8 @@ package com.xpower.xhomeremote;
 
 import com.xpower.xhomeremote.data.model.HomeApplianceType;
 import com.xpower.xhomeremote.data.model.SocketDTO;
-import com.xpower.xhomeremote.presenter.ISocketPresenter;
-import com.xpower.xhomeremote.presenter.SocketPresenter;
+import com.xpower.xhomeremote.presenter.socketlist.ISocketPresenter;
+import com.xpower.xhomeremote.presenter.socketlist.SocketPresenter;
 import com.xpower.xhomeremote.ui.socketlist.ISocketListView;
 
 import org.junit.Test;

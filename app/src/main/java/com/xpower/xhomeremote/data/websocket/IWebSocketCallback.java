@@ -1,12 +1,18 @@
-package com.xpower.xhomeremote.data.socket;
+package com.xpower.xhomeremote.data.websocket;
 
 import com.xpower.xhomeremote.data.model.SocketDTO;
 
 import java.util.List;
 
+import okhttp3.WebSocket;
+
 public interface IWebSocketCallback {
-    void internalConnectionFailed();
-    void externalConnectionFailed();
     void receiveSockets(List<SocketDTO> sockets);
+
+    void internalConnectionFailed();
+
+    void externalConnectionFailed();
+
+    void connectEstablis(WebSocket wSocket);
 }
 

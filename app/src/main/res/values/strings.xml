@@ -5,4 +5,6 @@
     <string name="socketcard_socketId">Socket ID:</string>
     <string name="socketcard_agentId">Agent ID:</string>
     <string name="not_registered">Not Registered</string>
+    <string name="socketcard_name">Name:</string>
+    <string name="register">Register</string>
 </resources>

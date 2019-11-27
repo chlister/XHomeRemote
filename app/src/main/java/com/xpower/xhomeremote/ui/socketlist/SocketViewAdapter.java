@@ -28,6 +28,7 @@ import java.util.List;
 public class SocketViewAdapter extends RecyclerView.Adapter<SocketViewAdapter.ViewHolder> {
     private List<SocketDTO> mData;
     private LayoutInflater mInflater;
+    private static onClickListner onclicklistner;
     private Context mContext;
 
     /**
@@ -109,7 +110,29 @@ public class SocketViewAdapter extends RecyclerView.Adapter<SocketViewAdapter.Vi
      * @since   11/20/2019
      * @status  Under Development
      */
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public void setOnItemClickListener(onClickListner onclicklistner) {
+        this.onclicklistner = onclicklistner;
+    }
+
+    /**
+     * @author  Martin J. J.
+     * @version 1.0
+     * @since   11/20/2019
+     * @status  Under Development
+     */
+    public interface onClickListner {
+        void onItemClick(SocketDTO item);
+        void onItemLongClick(SocketDTO item);
+    }
+
+
+    /**
+     * @author  Martin J. J.
+     * @version 1.0
+     * @since   11/20/2019
+     * @status  Under Development
+     */
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener{
         TextView nameTextView, typeTextView, agentIdTextView, socketIdTextView, typeHeadTextView;
         LinearLayout agentIdLayout, socketIdLayout;
         Switch switchView;
@@ -131,19 +154,22 @@ public class SocketViewAdapter extends RecyclerView.Adapter<SocketViewAdapter.Vi
 
             agentIdLayout = itemView.findViewById(R.id.SocketViewAdapter_agentID_ll);
             socketIdLayout = itemView.findViewById(R.id.SocketViewAdapter_SocketID_ll);
-
             switchView = itemView.findViewById(R.id.SocketViewAdapter_Switch);
+
+            itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
         }
 
-        /**
-         * @author  Martin J. J.
-         * @version 1.0
-         * @since   11/20/2019
-         * @status  Defined
-         */
+
         @Override
         public void onClick(View v) {
+            onclicklistner.onItemClick(mData.get(getAdapterPosition()));
+        }
 
+        @Override
+        public boolean onLongClick(View v) {
+            onclicklistner.onItemLongClick(mData.get(getAdapterPosition()));
+            return false;
         }
     }
 }

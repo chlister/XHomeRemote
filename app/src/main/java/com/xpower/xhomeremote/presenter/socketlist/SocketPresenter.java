@@ -30,7 +30,7 @@ public class SocketPresenter implements ISocketPresenter, ISocketPresenterCallba
         mWebSocketManager.setSuccesCallback(this);
         mWebSocketManager.setFailedCallback(this);
         mWebSocketManager.setReceiveSocketCallback(this);
-        mWebSocketManager.startSocketConnection();
+        //mWebSocketManager.startSocketConnection();
     }
 
     /**

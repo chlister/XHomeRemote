@@ -11,6 +11,7 @@ import com.xpower.xhomeremote.data.websocket.callback.IWebsocketConnectionSucces
 import com.xpower.xhomeremote.data.websocket.callback.IWebsocketReceiveSockets;
 import com.xpower.xhomeremote.data.websocket.callback.IWebsocketRegister;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.OkHttpClient;
@@ -110,9 +111,14 @@ public class WebSocketManager implements IWebSocketCallback, IWebSocketManager {
         mSuccesCallback.websocketConnectionSucces();
     }
 
+
     @Override
-    public void receiveSockets(List<Socket> sockets) {
-        mReceiveSocketCallback.receiveSockets(sockets);
+    public void receiveSockets(List<SocketDTO> sockets) {
+        List<Socket> list = new ArrayList<>();
+        for (SocketDTO s: sockets) {
+            list.add(new Socket(s.getId(), s.getAgentId(), s.getName(), HomeApplianceType.valueOf(s.getApplianceType())));
+        }
+        mReceiveSocketCallback.receiveSockets(list);
     }
 
     @Override

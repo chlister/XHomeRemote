@@ -1,5 +1,5 @@
 /**
- * This Class is a data transfer object the represent en unique socket
+ * This Class is a data transfer object the represent en unique outlets
  *
  * @author Martin J. J.
  * @version 1.0
@@ -10,13 +10,13 @@ package com.xpower.xhomeremote.data.model;
 
 import java.io.Serializable;
 
-public class Socket implements Serializable {
+public class Outlet implements Serializable {
     public int id;
     public int agentId;
     public String name;
     public HomeApplianceType type;
 
-    public Socket(int id, int agentId, String name, HomeApplianceType type) {
+    public Outlet(int id, int agentId, String name, HomeApplianceType type) {
         this.id = id;
         this.agentId = agentId;
         this.name = name;
@@ -26,7 +26,7 @@ public class Socket implements Serializable {
 
     @Override
     public String toString() {
-        return "Socket{" +
+        return "Outlet{" +
                 "id=" + id +
                 ", agentId=" + agentId +
                 ", name='" + name + '\'' +

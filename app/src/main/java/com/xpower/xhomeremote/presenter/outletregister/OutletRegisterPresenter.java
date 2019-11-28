@@ -1,23 +1,23 @@
-package com.xpower.xhomeremote.presenter.socketregister;
+package com.xpower.xhomeremote.presenter.outletregister;
 
-import com.xpower.xhomeremote.data.model.Socket;
+import com.xpower.xhomeremote.data.model.Outlet;
 import com.xpower.xhomeremote.data.websocket.IWebSocketManager;
 import com.xpower.xhomeremote.data.websocket.WebSocketManager;
-import com.xpower.xhomeremote.ui.socketregister.ISocketRegisterView;
+import com.xpower.xhomeremote.ui.outletregister.IOutletRegisterView;
 
-public class SocketRegisterPresenter implements ISocketRegisterPresneterCallback, ISocketRegisterPresenter {
-    private ISocketRegisterView mView;
+public class OutletRegisterPresenter implements IOutletRegisterPresneterCallback, IOutletRegisterPresenter {
+    private IOutletRegisterView mView;
     private IWebSocketManager mWebSocketManager;
 
-    public SocketRegisterPresenter(ISocketRegisterView mView) {
+    public OutletRegisterPresenter(IOutletRegisterView mView) {
         this.mView = mView;
         mWebSocketManager = WebSocketManager.getInstance();
         mWebSocketManager.setRegisterCallback(this);
     }
 
     @Override
-    public void registerSocket(Socket socket){
-        mWebSocketManager.registerSocket(socket);
+    public void registerOutlet(Outlet outlet){
+        mWebSocketManager.registerSocket(outlet);
     }
 
     @Override

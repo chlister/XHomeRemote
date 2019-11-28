@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:layout_margin="16dp"
     android:orientation="vertical"
-    tools:context=".ui.socketregister.SocketRegisterActivity">
+    tools:context=".ui.outletregister.OutletRegisterActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,7 +27,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
-                    android:text="@string/socketcard_agentId"
+                    android:text="@string/outletcard_agentId"
                     android:textSize="14sp" />
 
                 <TextView
@@ -51,11 +51,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
-                    android:text="@string/socketcard_socketId"
+                    android:text="@string/outletcard_outletId"
                     android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/register_SocketID"
+                    android:id="@+id/register_OutletID"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
@@ -74,7 +74,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
-                    android:text="@string/socketcard_type"
+                    android:text="@string/outletcard_type"
                     android:textSize="14sp" />
 
                 <TextView
@@ -103,7 +103,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:text="@string/socketcard_name"
+            android:text="@string/outletcard_name"
             android:textSize="18sp" />
 
         <EditText
@@ -129,7 +129,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:text="@string/socketcard_type"
+            android:text="@string/outletcard_type"
             android:textSize="18sp" />
 
         <Spinner

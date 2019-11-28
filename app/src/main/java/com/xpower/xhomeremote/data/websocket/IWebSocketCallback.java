@@ -1,7 +1,6 @@
 package com.xpower.xhomeremote.data.websocket;
 
 import com.xpower.message.model.SocketDTO;
-import com.xpower.xhomeremote.data.model.Socket;
 
 import java.util.List;
 

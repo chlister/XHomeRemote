@@ -5,13 +5,13 @@
  * @version 1.0
  * @since 11/20/2019
  */
-package com.xpower.xhomeremote.ui.socketlist;
+package com.xpower.xhomeremote.ui.outletlist;
 
-import com.xpower.xhomeremote.data.model.Socket;
+import com.xpower.xhomeremote.data.model.Outlet;
 
 import java.util.List;
 
-public interface ISocketListView {
-    void updateSocketList(List<Socket> sockets);
+public interface IOutletListView {
+    void updateOutletList(List<Outlet> outlets);
     void ConnectionFeedback(boolean b);
 }

@@ -5,17 +5,17 @@
  * @version 1.0
  * @since 11/20/2019
  */
-package com.xpower.xhomeremote.presenter.socketlist;
+package com.xpower.xhomeremote.presenter.outletlist;
 
-import com.xpower.xhomeremote.data.model.Socket;
+import com.xpower.xhomeremote.data.model.Outlet;
 import com.xpower.xhomeremote.data.websocket.IWebSocketManager;
 import com.xpower.xhomeremote.data.websocket.WebSocketManager;
-import com.xpower.xhomeremote.ui.socketlist.ISocketListView;
+import com.xpower.xhomeremote.ui.outletlist.IOutletListView;
 
 import java.util.List;
 
-public class SocketPresenter implements ISocketPresenter, ISocketPresenterCallback {
-    private ISocketListView mView;
+public class OutletListPresenter implements IOutletListPresenter, IOutletListPresenterCallback {
+    private IOutletListView mView;
     private IWebSocketManager mWebSocketManager;
 
     /**
@@ -24,12 +24,12 @@ public class SocketPresenter implements ISocketPresenter, ISocketPresenterCallba
      * @since   11/20/2019
      * @status  Ready for review
      */
-    public SocketPresenter(ISocketListView view){
+    public OutletListPresenter(IOutletListView view){
         mView = view;
         mWebSocketManager = WebSocketManager.getInstance();
         mWebSocketManager.setSuccesCallback(this);
         mWebSocketManager.setFailedCallback(this);
-        mWebSocketManager.setReceiveSocketCallback(this);
+        mWebSocketManager.setReceiveOutletCallback(this);
         //mWebSocketManager.startSocketConnection();
     }
 
@@ -40,8 +40,8 @@ public class SocketPresenter implements ISocketPresenter, ISocketPresenterCallba
      * @status  Defined
      */
     @Override
-    public void getSockets() {
-        mWebSocketManager.getSockets();
+    public void getOutlets() {
+        mWebSocketManager.getOutlets();
     }
 
     /**
@@ -51,8 +51,8 @@ public class SocketPresenter implements ISocketPresenter, ISocketPresenterCallba
      * @status  Ready for Review
      */
     @Override
-    public void receiveSockets(List<Socket> sockets) {
-        mView.updateSocketList(sockets);
+    public void receiveOutlets(List<Outlet> outlets) {
+        mView.updateOutletList(outlets);
     }
 
     /**

@@ -8,7 +8,7 @@ import com.xpower.xhomeremote.R;
 import com.xpower.xhomeremote.presenter.login.ILoginPresenter;
 import com.xpower.xhomeremote.presenter.login.LoginPresenter;
 import com.xpower.xhomeremote.ui.base.BaseActivity;
-import com.xpower.xhomeremote.ui.socketlist.SocketListActivity;
+import com.xpower.xhomeremote.ui.outletlist.OutletListActivity;
 
 public class LoginActivity extends BaseActivity implements ILoginView {
     private ILoginPresenter presenter;
@@ -38,7 +38,7 @@ public class LoginActivity extends BaseActivity implements ILoginView {
 
     @Override
     public void connectionSuccess(){
-        Intent i = new Intent(this, SocketListActivity.class);
+        Intent i = new Intent(this, OutletListActivity.class);
         startActivity(i);
     }
 }

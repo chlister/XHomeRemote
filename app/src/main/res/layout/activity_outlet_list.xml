@@ -5,10 +5,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.socketlist.SocketListActivity">
+    tools:context=".ui.outletlist.OutletListActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/SocketListActivity_recyclerView"
+        android:id="@+id/OutletListActivity_recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"

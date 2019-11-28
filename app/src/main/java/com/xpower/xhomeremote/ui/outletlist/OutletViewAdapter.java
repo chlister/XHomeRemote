@@ -5,7 +5,7 @@
  * @version 1.0
  * @since 11/20/2019
  */
-package com.xpower.xhomeremote.ui.socketlist;
+package com.xpower.xhomeremote.ui.outletlist;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -20,15 +20,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.xpower.xhomeremote.R;
 import com.xpower.xhomeremote.data.model.HomeApplianceType;
-import com.xpower.xhomeremote.data.model.Socket;
+import com.xpower.xhomeremote.data.model.Outlet;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SocketViewAdapter extends RecyclerView.Adapter<SocketViewAdapter.ViewHolder> {
-    private List<Socket> mData;
+public class OutletViewAdapter extends RecyclerView.Adapter<OutletViewAdapter.ViewHolder> {
+    private List<Outlet> mData;
     private LayoutInflater mInflater;
-    private static onClickListner onclicklistner;
+    private static onClickListner mOnclicklistner;
     private Context mContext;
 
     /**
@@ -37,7 +37,7 @@ public class SocketViewAdapter extends RecyclerView.Adapter<SocketViewAdapter.Vi
      * @since   11/20/2019
      * @status  Under Development
      */
-    public SocketViewAdapter(Context context) {
+    public OutletViewAdapter(Context context) {
         this.mContext = context;
         this.mInflater = LayoutInflater.from(context);
         this.mData = new ArrayList<>();
@@ -49,7 +49,7 @@ public class SocketViewAdapter extends RecyclerView.Adapter<SocketViewAdapter.Vi
      * @since   11/20/2019
      * @status  Under Development
      */
-    public void setData(List<Socket> data){
+    public void setData(List<Outlet> data){
         this.mData = data;
     }
 
@@ -62,7 +62,7 @@ public class SocketViewAdapter extends RecyclerView.Adapter<SocketViewAdapter.Vi
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(R.layout.item_socket_card, parent, false);
+        View view = mInflater.inflate(R.layout.item_outlet_card, parent, false);
         return new ViewHolder(view);
     }
 
@@ -75,21 +75,26 @@ public class SocketViewAdapter extends RecyclerView.Adapter<SocketViewAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         if(mData.get(position).name.isEmpty()){
-            holder.nameTextView.setVisibility(View.GONE);
-            holder.agentIdTextView.setText(Integer.toString(mData.get(position).agentId));
-            holder.socketIdTextView.setText(Integer.toString(mData.get(position).id));
+            holder.mNameTextView.setVisibility(View.GONE);
+            holder.mAgentIdLayout.setVisibility(View.VISIBLE);
+            holder.mOutletIdLayout.setVisibility(View.VISIBLE);
+            holder.mAgentIdTextView.setText(Integer.toString(mData.get(position).agentId));
+            holder.mOutletIdTextView.setText(Integer.toString(mData.get(position).id));
         }
         else{
-            holder.agentIdLayout.setVisibility(View.GONE);
-            holder.socketIdLayout.setVisibility(View.GONE);
-            holder.nameTextView.setText(mData.get(position).name);
+            holder.mNameTextView.setVisibility(View.VISIBLE);
+            holder.mAgentIdLayout.setVisibility(View.GONE);
+            holder.mOutletIdLayout.setVisibility(View.GONE);
+            holder.mNameTextView.setText(mData.get(position).name);
         }
         if(mData.get(position).type == HomeApplianceType.NON){
-            holder.typeTextView.setText(mContext.getString(R.string.not_registered));
-            holder.typeHeadTextView.setVisibility(View.GONE);
+            holder.mTypeTextView.setText(mContext.getString(R.string.not_registered));
+            holder.mTypeHeadTextView.setVisibility(View.GONE);
         }
-        else
-            holder.typeTextView.setText(mData.get(position).type.name());
+        else {
+            holder.mTypeTextView.setText(mData.get(position).type.name());
+            holder.mTypeHeadTextView.setVisibility(View.VISIBLE);
+        }
     }
 
 
@@ -111,7 +116,7 @@ public class SocketViewAdapter extends RecyclerView.Adapter<SocketViewAdapter.Vi
      * @status  Under Development
      */
     public void setOnItemClickListener(onClickListner onclicklistner) {
-        this.onclicklistner = onclicklistner;
+        this.mOnclicklistner = onclicklistner;
     }
 
     /**
@@ -121,8 +126,8 @@ public class SocketViewAdapter extends RecyclerView.Adapter<SocketViewAdapter.Vi
      * @status  Under Development
      */
     public interface onClickListner {
-        void onItemClick(Socket item);
-        void onItemLongClick(Socket item);
+        void onItemClick(Outlet item);
+        void onItemLongClick(Outlet item);
     }
 
 
@@ -133,9 +138,9 @@ public class SocketViewAdapter extends RecyclerView.Adapter<SocketViewAdapter.Vi
      * @status  Under Development
      */
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener{
-        TextView nameTextView, typeTextView, agentIdTextView, socketIdTextView, typeHeadTextView;
-        LinearLayout agentIdLayout, socketIdLayout;
-        Switch switchView;
+        TextView mNameTextView, mTypeTextView, mAgentIdTextView, mOutletIdTextView, mTypeHeadTextView;
+        LinearLayout mAgentIdLayout, mOutletIdLayout;
+        Switch mSwitchView;
 
 
         /**
@@ -146,15 +151,15 @@ public class SocketViewAdapter extends RecyclerView.Adapter<SocketViewAdapter.Vi
          */
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            nameTextView = itemView.findViewById(R.id.SocketViewAdapter_Name);
-            typeTextView = itemView.findViewById(R.id.SocketViewAdapter_Type);
-            agentIdTextView = itemView.findViewById(R.id.SocketViewAdapter_AgentID);
-            socketIdTextView = itemView.findViewById(R.id.SocketViewAdapter_SocketID);
-            typeHeadTextView = itemView.findViewById(R.id.SocketViewAdapter_type_head_tv);
+            mNameTextView = itemView.findViewById(R.id.OutletViewAdapter_Name);
+            mTypeTextView = itemView.findViewById(R.id.OutletViewAdapter_Type);
+            mAgentIdTextView = itemView.findViewById(R.id.OutletViewAdapter_AgentID);
+            mOutletIdTextView = itemView.findViewById(R.id.OutletViewAdapter_OutletID);
+            mTypeHeadTextView = itemView.findViewById(R.id.OutletViewAdapter_type_head_tv);
 
-            agentIdLayout = itemView.findViewById(R.id.SocketViewAdapter_agentID_ll);
-            socketIdLayout = itemView.findViewById(R.id.SocketViewAdapter_SocketID_ll);
-            switchView = itemView.findViewById(R.id.SocketViewAdapter_Switch);
+            mAgentIdLayout = itemView.findViewById(R.id.OutletViewAdapter_agentID_ll);
+            mOutletIdLayout = itemView.findViewById(R.id.OutletViewAdapter_OutletID_ll);
+            mSwitchView = itemView.findViewById(R.id.OutletViewAdapter_Switch);
 
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
@@ -163,12 +168,12 @@ public class SocketViewAdapter extends RecyclerView.Adapter<SocketViewAdapter.Vi
 
         @Override
         public void onClick(View v) {
-            onclicklistner.onItemClick(mData.get(getAdapterPosition()));
+            mOnclicklistner.onItemClick(mData.get(getAdapterPosition()));
         }
 
         @Override
         public boolean onLongClick(View v) {
-            onclicklistner.onItemLongClick(mData.get(getAdapterPosition()));
+            mOnclicklistner.onItemLongClick(mData.get(getAdapterPosition()));
             return false;
         }
     }

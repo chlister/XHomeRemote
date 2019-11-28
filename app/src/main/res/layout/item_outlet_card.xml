@@ -10,7 +10,7 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/SocketViewAdapter_Socket_ImageView"
+            android:id="@+id/OutletViewAdapter_Outlet_ImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
@@ -20,7 +20,7 @@
 
 
         <TextView
-            android:id="@+id/SocketViewAdapter_Name"
+            android:id="@+id/OutletViewAdapter_Name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
@@ -28,13 +28,13 @@
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/SocketViewAdapter_Socket_ImageView" />
+            app:layout_constraintTop_toBottomOf="@+id/OutletViewAdapter_Outlet_ImageView" />
 
         <LinearLayout
-            android:id="@+id/SocketViewAdapter_agentID_ll"
+            android:id="@+id/OutletViewAdapter_agentID_ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/SocketViewAdapter_Name"
+            app:layout_constraintTop_toBottomOf="@+id/OutletViewAdapter_Name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:orientation="horizontal">
@@ -43,12 +43,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/socketcard_agentId"
+                android:text="@string/outletcard_agentId"
                 android:textSize="14sp"
                 android:layout_marginLeft="8dp"/>
 
             <TextView
-                android:id="@+id/SocketViewAdapter_AgentID"
+                android:id="@+id/OutletViewAdapter_AgentID"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
@@ -59,10 +59,10 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/SocketViewAdapter_SocketID_ll"
+            android:id="@+id/OutletViewAdapter_OutletID_ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/SocketViewAdapter_agentID_ll"
+            app:layout_constraintTop_toBottomOf="@+id/OutletViewAdapter_agentID_ll"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:orientation="horizontal">
@@ -71,12 +71,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/socketcard_socketId"
+                android:text="@string/outletcard_outletId"
                 android:textSize="14sp"
                 android:layout_marginLeft="8dp"/>
 
             <TextView
-                android:id="@+id/SocketViewAdapter_SocketID"
+                android:id="@+id/OutletViewAdapter_OutletID"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
@@ -86,25 +86,25 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/SocketViewAdapter_type_ll"
+            android:id="@+id/OutletViewAdapter_type_ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/SocketViewAdapter_SocketID_ll"
+            app:layout_constraintTop_toBottomOf="@+id/OutletViewAdapter_OutletID_ll"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:orientation="horizontal">
 
 
             <TextView
-                android:id="@+id/SocketViewAdapter_type_head_tv"
+                android:id="@+id/OutletViewAdapter_type_head_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
-                android:text="@string/socketcard_type"
+                android:text="@string/outletcard_type"
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/SocketViewAdapter_Type"
+                android:id="@+id/OutletViewAdapter_Type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
@@ -117,14 +117,14 @@
 
 
         <Switch
-            android:id="@+id/SocketViewAdapter_Switch"
+            android:id="@+id/OutletViewAdapter_Switch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/SocketViewAdapter_type_ll" />
+            app:layout_constraintTop_toBottomOf="@+id/OutletViewAdapter_type_ll" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

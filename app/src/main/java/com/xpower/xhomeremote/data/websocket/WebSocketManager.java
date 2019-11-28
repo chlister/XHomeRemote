@@ -2,13 +2,12 @@ package com.xpower.xhomeremote.data.websocket;
 
 import com.xpower.message.Message;
 import com.xpower.message.MethodCode;
-import com.xpower.message.RespondCodes;
 import com.xpower.message.model.SocketDTO;
 import com.xpower.xhomeremote.data.model.HomeApplianceType;
-import com.xpower.xhomeremote.data.model.Socket;
+import com.xpower.xhomeremote.data.model.Outlet;
 import com.xpower.xhomeremote.data.websocket.callback.IWebsocketConnectionFailed;
 import com.xpower.xhomeremote.data.websocket.callback.IWebsocketConnectionSuccess;
-import com.xpower.xhomeremote.data.websocket.callback.IWebsocketReceiveSockets;
+import com.xpower.xhomeremote.data.websocket.callback.IWebsocketReceiveOutlet;
 import com.xpower.xhomeremote.data.websocket.callback.IWebsocketRegister;
 
 import java.util.ArrayList;
@@ -23,7 +22,7 @@ public class WebSocketManager implements IWebSocketCallback, IWebSocketManager {
     private IWebsocketConnectionSuccess mSuccesCallback;
     private IWebsocketConnectionFailed mFailedCallback;
 
-    private IWebsocketReceiveSockets mReceiveSocketCallback;
+    private IWebsocketReceiveOutlet mReceiveSocketCallback;
 
 
 
@@ -32,7 +31,7 @@ public class WebSocketManager implements IWebSocketCallback, IWebSocketManager {
     private WebSocketListener mWebSocketListener;
     private OkHttpClient mClient;
     private String mInternIp, mExternIp;
-    private WebSocket mWebSocketConnection;
+    public WebSocket mWebSocketConnection;
 
     public WebSocketManager(){
         mWebSocketListener = new WebSocketListener(this);
@@ -56,7 +55,7 @@ public class WebSocketManager implements IWebSocketCallback, IWebSocketManager {
     }
 
     @Override
-    public void setReceiveSocketCallback(IWebsocketReceiveSockets mReceiveSocketCallback) {
+    public void setReceiveOutletCallback(IWebsocketReceiveOutlet mReceiveSocketCallback) {
         this.mReceiveSocketCallback = mReceiveSocketCallback;
     }
 
@@ -67,21 +66,27 @@ public class WebSocketManager implements IWebSocketCallback, IWebSocketManager {
 
     @Override
     public void startSocketConnection(){
-        if(mInternIp != null){
-            mClient.newWebSocket(new Request.Builder().url(mInternIp).build(),mWebSocketListener );
+        if(mWebSocketConnection == null ) {
+            if (mInternIp != null) {
+                mClient.newWebSocket(new Request.Builder().url(mInternIp).build(), mWebSocketListener);
+            }
         }
+        else{
+            mSuccesCallback.websocketConnectionSucces();
+        }
+
     }
 
     @Override
-    public void getSockets() {
+    public void getOutlets() {
         Message m = new Message(null, MethodCode.GET_SOCKETS, null);
         if(mWebSocketConnection != null)
             mWebSocketConnection.send(m.encode());
     }
 
     @Override
-    public void registerSocket(Socket socket) {
-        SocketDTO data = new SocketDTO(socket.id, socket.agentId, socket.name, socket.type.name());
+    public void registerSocket(Outlet outlet) {
+        SocketDTO data = new SocketDTO(outlet.id, outlet.agentId, outlet.name, outlet.type.name());
         Message m = new Message(null, MethodCode.REGISTER, data );
         if(mWebSocketConnection != null)
             mWebSocketConnection.send(m.encode());
@@ -114,11 +119,11 @@ public class WebSocketManager implements IWebSocketCallback, IWebSocketManager {
 
     @Override
     public void receiveSockets(List<SocketDTO> sockets) {
-        List<Socket> list = new ArrayList<>();
+        List<Outlet> list = new ArrayList<>();
         for (SocketDTO s: sockets) {
-            list.add(new Socket(s.getId(), s.getAgentId(), s.getName(), HomeApplianceType.valueOf(s.getApplianceType())));
+            list.add(new Outlet(s.getId(), s.getAgentId(), s.getName(), HomeApplianceType.valueOf(s.getApplianceType())));
         }
-        mReceiveSocketCallback.receiveSockets(list);
+        mReceiveSocketCallback.receiveOutlets(list);
     }
 
     @Override

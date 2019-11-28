@@ -1,5 +1,5 @@
 /**
- * This enum represent the types a Socket can have
+ * This enum represent the types a Outlet can have
  *
  * @author Martin J. J.
  * @version 1.0

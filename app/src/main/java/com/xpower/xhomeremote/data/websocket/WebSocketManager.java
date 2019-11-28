@@ -1,12 +1,15 @@
 package com.xpower.xhomeremote.data.websocket;
 
-import com.xpower.xhomeremote.data.model.SocketDTO;
+import com.xpower.message.Message;
+import com.xpower.message.MethodCode;
+import com.xpower.message.RespondCodes;
+import com.xpower.message.model.SocketDTO;
+import com.xpower.xhomeremote.data.model.HomeApplianceType;
+import com.xpower.xhomeremote.data.model.Socket;
 import com.xpower.xhomeremote.data.websocket.callback.IWebsocketConnectionFailed;
 import com.xpower.xhomeremote.data.websocket.callback.IWebsocketConnectionSuccess;
 import com.xpower.xhomeremote.data.websocket.callback.IWebsocketReceiveSockets;
-import com.xpower.xhomeremote.presenter.login.ILoginPresenterCallback;
-import com.xpower.xhomeremote.presenter.socketlist.ISocketPresenter;
-import com.xpower.xhomeremote.presenter.socketlist.ISocketPresenterCallback;
+import com.xpower.xhomeremote.data.websocket.callback.IWebsocketRegister;
 
 import java.util.List;
 
@@ -21,6 +24,10 @@ public class WebSocketManager implements IWebSocketCallback, IWebSocketManager {
 
     private IWebsocketReceiveSockets mReceiveSocketCallback;
 
+
+
+    private IWebsocketRegister mRegisterCallback;
+
     private WebSocketListener mWebSocketListener;
     private OkHttpClient mClient;
     private String mInternIp, mExternIp;
@@ -30,8 +37,6 @@ public class WebSocketManager implements IWebSocketCallback, IWebSocketManager {
         mWebSocketListener = new WebSocketListener(this);
         mClient = new OkHttpClient();
     }
-
-
 
     public static WebSocketManager getInstance(){
         if(instance == null)
@@ -55,6 +60,11 @@ public class WebSocketManager implements IWebSocketCallback, IWebSocketManager {
     }
 
     @Override
+    public void setRegisterCallback(IWebsocketRegister mRegisterCallback) {
+        this.mRegisterCallback = mRegisterCallback;
+    }
+
+    @Override
     public void startSocketConnection(){
         if(mInternIp != null){
             mClient.newWebSocket(new Request.Builder().url(mInternIp).build(),mWebSocketListener );
@@ -63,8 +73,17 @@ public class WebSocketManager implements IWebSocketCallback, IWebSocketManager {
 
     @Override
     public void getSockets() {
+        Message m = new Message(null, MethodCode.GET_SOCKETS, null);
         if(mWebSocketConnection != null)
-            mWebSocketConnection.send("GETSTUFF"); //TODO:
+            mWebSocketConnection.send(m.encode());
+    }
+
+    @Override
+    public void registerSocket(Socket socket) {
+        SocketDTO data = new SocketDTO(socket.id, socket.agentId, socket.name, socket.type.name());
+        Message m = new Message(null, MethodCode.REGISTER, data );
+        if(mWebSocketConnection != null)
+            mWebSocketConnection.send(m.encode());
     }
 
     @Override
@@ -76,7 +95,7 @@ public class WebSocketManager implements IWebSocketCallback, IWebSocketManager {
     @Override
     public void internalConnectionFailed() {
         if(mInternIp != null){
-            mClient.newWebSocket(new Request.Builder().url("wss://echo.websocket.org").build(),mWebSocketListener );
+            mClient.newWebSocket(new Request.Builder().url(mExternIp).build(),mWebSocketListener );
         }
     }
 
@@ -92,8 +111,16 @@ public class WebSocketManager implements IWebSocketCallback, IWebSocketManager {
     }
 
     @Override
-    public void receiveSockets(List<SocketDTO> sockets) {
+    public void receiveSockets(List<Socket> sockets) {
         mReceiveSocketCallback.receiveSockets(sockets);
+    }
+
+    @Override
+    public void registerconnection(boolean success) {
+        if(success)
+            mRegisterCallback.onRegisterComplete();
+        else
+            mFailedCallback.websocketConnectionFailed(); //TODO: custom callback
     }
 
 }

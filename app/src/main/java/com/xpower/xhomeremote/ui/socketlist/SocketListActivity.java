@@ -13,10 +13,9 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.xpower.xhomeremote.R;
-import com.xpower.xhomeremote.data.model.SocketDTO;
+import com.xpower.xhomeremote.data.model.Socket;
 import com.xpower.xhomeremote.presenter.socketlist.ISocketPresenter;
 import com.xpower.xhomeremote.presenter.socketlist.MockSocketPresenter;
-import com.xpower.xhomeremote.presenter.socketlist.SocketPresenter;
 import com.xpower.xhomeremote.ui.base.BaseActivity;
 import com.xpower.xhomeremote.ui.socketregister.SocketRegisterActivity;
 
@@ -60,7 +59,7 @@ public class SocketListActivity extends BaseActivity implements ISocketListView,
      * @status  Under Development
      */
     @Override
-    public void updateSocketList(List<SocketDTO> sockets) {
+    public void updateSocketList(List<Socket> sockets) {
         mSocketViewAdapter.setData(sockets);
     }
 
@@ -93,7 +92,7 @@ public class SocketListActivity extends BaseActivity implements ISocketListView,
      * @status  Defined
      */
     @Override
-    public void onItemClick(SocketDTO item) {
+    public void onItemClick(Socket item) {
         //TODO: turn on/off socket
     }
 
@@ -104,7 +103,7 @@ public class SocketListActivity extends BaseActivity implements ISocketListView,
      * @status  Under Development
      */
     @Override
-    public void onItemLongClick(SocketDTO item) {
+    public void onItemLongClick(Socket item) {
         Intent i = new Intent(this, SocketRegisterActivity.class);
         i.putExtra(SocketRegisterActivity.DATA_INTENT_SOCKET, item);
         startActivity(i);

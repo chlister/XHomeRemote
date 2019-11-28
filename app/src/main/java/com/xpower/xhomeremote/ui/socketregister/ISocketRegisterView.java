@@ -1,6 +1,6 @@
 package com.xpower.xhomeremote.ui.socketregister;
 
-interface ISocketRegisterView {
+public interface ISocketRegisterView {
     void registerSuccesfull();
 
     void registerFailed();

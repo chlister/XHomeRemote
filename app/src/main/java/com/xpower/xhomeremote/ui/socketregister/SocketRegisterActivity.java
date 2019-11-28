@@ -11,24 +11,25 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import com.xpower.xhomeremote.R;
 import com.xpower.xhomeremote.data.model.HomeApplianceType;
-import com.xpower.xhomeremote.data.model.SocketDTO;
+import com.xpower.xhomeremote.data.model.Socket;
+import com.xpower.xhomeremote.presenter.socketregister.ISocketRegisterPresenter;
+import com.xpower.xhomeremote.presenter.socketregister.SocketRegisterPresenter;
 import com.xpower.xhomeremote.ui.base.BaseActivity;
 
 public class SocketRegisterActivity extends BaseActivity implements ISocketRegisterView {
     public static final String DATA_INTENT_SOCKET = "DATA_INTENT_SOCKET";
+    private ISocketRegisterPresenter presenter;
     TextView typeTextView, agentIdTextView, socketIdTextView;
     EditText nameEditText;
     Spinner typeSpinner;
     Button button;
 
-    private SocketDTO item;
+    private Socket item;
 
     /**
      * @author  Martin J. J.
@@ -40,6 +41,7 @@ public class SocketRegisterActivity extends BaseActivity implements ISocketRegis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_socket_register);
+        presenter = new SocketRegisterPresenter(this);
 
         typeTextView = findViewById(R.id.register_Type);
         agentIdTextView = findViewById(R.id.register_AgentID);
@@ -48,7 +50,7 @@ public class SocketRegisterActivity extends BaseActivity implements ISocketRegis
         typeSpinner = findViewById(R.id.register_Type_spinner);
         button = findViewById(R.id.register_button);
 
-        item = (SocketDTO) getIntent().getSerializableExtra(DATA_INTENT_SOCKET);
+        item = (Socket) getIntent().getSerializableExtra(DATA_INTENT_SOCKET);
 
         typeTextView.setText(item.type.name());
         agentIdTextView.setText(Integer.toString(item.agentId));
@@ -61,7 +63,9 @@ public class SocketRegisterActivity extends BaseActivity implements ISocketRegis
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                item.name = nameEditText.getText().toString();
+                item.type = HomeApplianceType.valueOf(typeSpinner.getSelectedItem().toString());
+                presenter.registerSocket(item);
             }
         });
     }

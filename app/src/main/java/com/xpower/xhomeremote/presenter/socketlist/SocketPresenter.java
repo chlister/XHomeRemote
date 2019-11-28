@@ -7,7 +7,7 @@
  */
 package com.xpower.xhomeremote.presenter.socketlist;
 
-import com.xpower.xhomeremote.data.model.SocketDTO;
+import com.xpower.xhomeremote.data.model.Socket;
 import com.xpower.xhomeremote.data.websocket.IWebSocketManager;
 import com.xpower.xhomeremote.data.websocket.WebSocketManager;
 import com.xpower.xhomeremote.ui.socketlist.ISocketListView;
@@ -51,7 +51,7 @@ public class SocketPresenter implements ISocketPresenter, ISocketPresenterCallba
      * @status  Ready for Review
      */
     @Override
-    public void receiveSockets(List<SocketDTO> sockets) {
+    public void receiveSockets(List<Socket> sockets) {
         mView.updateSocketList(sockets);
     }
 

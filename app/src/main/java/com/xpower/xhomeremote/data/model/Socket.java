@@ -10,13 +10,13 @@ package com.xpower.xhomeremote.data.model;
 
 import java.io.Serializable;
 
-public class SocketDTO implements Serializable {
+public class Socket implements Serializable {
     public int id;
     public int agentId;
     public String name;
     public HomeApplianceType type;
 
-    public SocketDTO(int id, int agentId, String name, HomeApplianceType type) {
+    public Socket(int id, int agentId, String name, HomeApplianceType type) {
         this.id = id;
         this.agentId = agentId;
         this.name = name;
@@ -26,7 +26,7 @@ public class SocketDTO implements Serializable {
 
     @Override
     public String toString() {
-        return "SocketDTO{" +
+        return "Socket{" +
                 "id=" + id +
                 ", agentId=" + agentId +
                 ", name='" + name + '\'' +

@@ -20,13 +20,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.xpower.xhomeremote.R;
 import com.xpower.xhomeremote.data.model.HomeApplianceType;
-import com.xpower.xhomeremote.data.model.SocketDTO;
+import com.xpower.xhomeremote.data.model.Socket;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SocketViewAdapter extends RecyclerView.Adapter<SocketViewAdapter.ViewHolder> {
-    private List<SocketDTO> mData;
+    private List<Socket> mData;
     private LayoutInflater mInflater;
     private static onClickListner onclicklistner;
     private Context mContext;
@@ -49,7 +49,7 @@ public class SocketViewAdapter extends RecyclerView.Adapter<SocketViewAdapter.Vi
      * @since   11/20/2019
      * @status  Under Development
      */
-    public void setData(List<SocketDTO> data){
+    public void setData(List<Socket> data){
         this.mData = data;
     }
 
@@ -121,8 +121,8 @@ public class SocketViewAdapter extends RecyclerView.Adapter<SocketViewAdapter.Vi
      * @status  Under Development
      */
     public interface onClickListner {
-        void onItemClick(SocketDTO item);
-        void onItemLongClick(SocketDTO item);
+        void onItemClick(Socket item);
+        void onItemLongClick(Socket item);
     }
 
 

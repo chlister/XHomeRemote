@@ -1,14 +1,8 @@
 package com.xpower.xhomeremote.presenter.login;
 
-import com.xpower.xhomeremote.data.model.SocketDTO;
-import com.xpower.xhomeremote.data.websocket.IWebSocketCallback;
 import com.xpower.xhomeremote.data.websocket.IWebSocketManager;
 import com.xpower.xhomeremote.data.websocket.WebSocketManager;
 import com.xpower.xhomeremote.ui.login.ILoginView;
-
-import java.util.List;
-
-import okhttp3.WebSocket;
 
 public class LoginPresenter implements ILoginPresenter, ILoginPresenterCallback {
     private IWebSocketManager mWebSocketManager;

@@ -7,11 +7,11 @@
  */
 package com.xpower.xhomeremote.ui.socketlist;
 
-import com.xpower.xhomeremote.data.model.SocketDTO;
+import com.xpower.xhomeremote.data.model.Socket;
 
 import java.util.List;
 
 public interface ISocketListView {
-    void updateSocketList(List<SocketDTO> sockets);
+    void updateSocketList(List<Socket> sockets);
     void ConnectionFeedback(boolean b);
 }

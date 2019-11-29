@@ -99,7 +99,7 @@ public class OutletListActivity extends BaseActivity implements IOutletListView,
      */
     @Override
     public void onItemClick(Outlet item) {
-        //TODO: turn on/off outlets
+
     }
 
     /**
@@ -113,5 +113,10 @@ public class OutletListActivity extends BaseActivity implements IOutletListView,
         Intent i = new Intent(this, OutletRegisterActivity.class);
         i.putExtra(OutletRegisterActivity.DATA_INTENT_OUTLET, item);
         startActivity(i);
+    }
+
+    @Override
+    public void onChangeListener(Outlet item, boolean isChecked) {
+        mOutletPresenter.changeState(item, isChecked);
     }
 }

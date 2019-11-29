@@ -15,13 +15,14 @@ public class Outlet implements Serializable {
     public int agentId;
     public String name;
     public HomeApplianceType type;
+    public boolean state;
 
-    public Outlet(int id, int agentId, String name, HomeApplianceType type) {
+    public Outlet(int id, int agentId, String name, HomeApplianceType type, boolean state) {
         this.id = id;
         this.agentId = agentId;
         this.name = name;
         this.type = type;
-
+        this.state = state;
     }
 
     @Override
@@ -31,6 +32,7 @@ public class Outlet implements Serializable {
                 ", agentId=" + agentId +
                 ", name='" + name + '\'' +
                 ", type=" + type +
+                ", state=" + state +
                 '}';
     }
 }

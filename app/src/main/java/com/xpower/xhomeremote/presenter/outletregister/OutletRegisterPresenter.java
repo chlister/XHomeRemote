@@ -17,7 +17,7 @@ public class OutletRegisterPresenter implements IOutletRegisterPresneterCallback
 
     @Override
     public void registerOutlet(Outlet outlet){
-        mWebSocketManager.registerSocket(outlet);
+        mWebSocketManager.registerOutlet(outlet);
     }
 
     @Override

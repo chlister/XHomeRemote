@@ -11,6 +11,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -33,7 +34,6 @@ public class OutletViewAdapter extends RecyclerView.Adapter<OutletViewAdapter.Vi
 
     /**
      * @author  Martin J. J.
-     * @version 1.0
      * @since   11/20/2019
      * @status  Under Development
      */
@@ -45,7 +45,6 @@ public class OutletViewAdapter extends RecyclerView.Adapter<OutletViewAdapter.Vi
 
     /**
      * @author  Martin J. J.
-     * @version 1.0
      * @since   11/20/2019
      * @status  Under Development
      */
@@ -55,7 +54,6 @@ public class OutletViewAdapter extends RecyclerView.Adapter<OutletViewAdapter.Vi
 
     /**
      * @author  Martin J. J.
-     * @version 1.0
      * @since   11/20/2019
      * @status  Under Development
      */
@@ -68,7 +66,6 @@ public class OutletViewAdapter extends RecyclerView.Adapter<OutletViewAdapter.Vi
 
     /**
      * @author  Martin J. J.
-     * @version 1.0
      * @since   11/20/2019
      * @status  Under Development
      */
@@ -95,12 +92,12 @@ public class OutletViewAdapter extends RecyclerView.Adapter<OutletViewAdapter.Vi
             holder.mTypeTextView.setText(mData.get(position).type.name());
             holder.mTypeHeadTextView.setVisibility(View.VISIBLE);
         }
+        holder.mSwitchView.setChecked(mData.get(position).state);
     }
 
 
     /**
      * @author  Martin J. J.
-     * @version 1.0
      * @since   11/20/2019
      * @status  Under Development
      */
@@ -111,7 +108,6 @@ public class OutletViewAdapter extends RecyclerView.Adapter<OutletViewAdapter.Vi
 
     /**
      * @author  Martin J. J.
-     * @version 1.0
      * @since   11/20/2019
      * @status  Under Development
      */
@@ -121,23 +117,22 @@ public class OutletViewAdapter extends RecyclerView.Adapter<OutletViewAdapter.Vi
 
     /**
      * @author  Martin J. J.
-     * @version 1.0
      * @since   11/20/2019
      * @status  Under Development
      */
     public interface onClickListner {
         void onItemClick(Outlet item);
         void onItemLongClick(Outlet item);
+        void onChangeListener(Outlet item, boolean isChecked);
     }
 
 
     /**
      * @author  Martin J. J.
-     * @version 1.0
      * @since   11/20/2019
      * @status  Under Development
      */
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener, CompoundButton.OnCheckedChangeListener {
         TextView mNameTextView, mTypeTextView, mAgentIdTextView, mOutletIdTextView, mTypeHeadTextView;
         LinearLayout mAgentIdLayout, mOutletIdLayout;
         Switch mSwitchView;
@@ -145,7 +140,6 @@ public class OutletViewAdapter extends RecyclerView.Adapter<OutletViewAdapter.Vi
 
         /**
          * @author  Martin J. J.
-         * @version 1.0
          * @since   11/20/2019
          * @status  Under Development
          */
@@ -160,21 +154,42 @@ public class OutletViewAdapter extends RecyclerView.Adapter<OutletViewAdapter.Vi
             mAgentIdLayout = itemView.findViewById(R.id.OutletViewAdapter_agentID_ll);
             mOutletIdLayout = itemView.findViewById(R.id.OutletViewAdapter_OutletID_ll);
             mSwitchView = itemView.findViewById(R.id.OutletViewAdapter_Switch);
+            mSwitchView.setOnCheckedChangeListener(this);
 
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
         }
 
 
+        /**
+         * @author  Martin J. J.
+         * @since   11/20/2019
+         * @status  Under Development
+         */
         @Override
         public void onClick(View v) {
-            mOnclicklistner.onItemClick(mData.get(getAdapterPosition()));
+
         }
 
+        /**
+         * @author  Martin J. J.
+         * @since   11/20/2019
+         * @status  Under Development
+         */
         @Override
         public boolean onLongClick(View v) {
             mOnclicklistner.onItemLongClick(mData.get(getAdapterPosition()));
             return false;
+        }
+
+        /**
+         * @author  Martin J. J.
+         * @since   11/20/2019
+         * @status  Under Development
+         */
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            mOnclicklistner.onChangeListener(mData.get(getAdapterPosition()), isChecked);
         }
     }
 }

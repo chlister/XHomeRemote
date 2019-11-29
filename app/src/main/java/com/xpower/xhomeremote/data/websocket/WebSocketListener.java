@@ -12,7 +12,7 @@ import android.util.Log;
 import com.google.gson.internal.LinkedTreeMap;
 import com.xpower.message.Message;
 import com.xpower.message.MethodCode;
-import com.xpower.message.model.SocketDTO;
+import com.xpower.message.model.OutletDTO;
 
 import java.util.ArrayList;
 
@@ -59,7 +59,7 @@ public final class WebSocketListener extends okhttp3.WebSocketListener {
         Log.i(TAG, "onMessage: " + text);
         Message m = new Message(text);
         if(m.getMethodCode().equals(MethodCode.GET_SOCKETS))
-            callback.receiveSockets(SocketDTO.deserialize((ArrayList<LinkedTreeMap>) m.getObj()));
+            callback.receiveSockets(OutletDTO.deserialize((ArrayList<LinkedTreeMap>) m.getObj()));
     }
 
     /**

@@ -20,7 +20,6 @@ public class OutletListPresenter implements IOutletListPresenter, IOutletListPre
 
     /**
      * @author  Martin J. J.
-     * @version 1.0
      * @since   11/20/2019
      * @status  Ready for review
      */
@@ -35,7 +34,6 @@ public class OutletListPresenter implements IOutletListPresenter, IOutletListPre
 
     /**
      * @author  Martin J. J.
-     * @version 1.0
      * @since   11/20/2019
      * @status  Defined
      */
@@ -46,7 +44,18 @@ public class OutletListPresenter implements IOutletListPresenter, IOutletListPre
 
     /**
      * @author  Martin J. J.
-     * @version 1.0
+     * @since   11/20/2019
+     * @status  Defined
+     */
+    @Override
+    public void changeState(Outlet outlet, boolean isChecked) {
+        outlet.state = isChecked;
+        mWebSocketManager.updateOutelet(outlet);
+    }
+
+
+    /**
+     * @author  Martin J. J.
      * @since   11/20/2019
      * @status  Ready for Review
      */
@@ -57,7 +66,6 @@ public class OutletListPresenter implements IOutletListPresenter, IOutletListPre
 
     /**
      * @author  Martin J. J.
-     * @version 1.0
      * @since   11/20/2019
      * @status  Defined
      */
@@ -66,6 +74,11 @@ public class OutletListPresenter implements IOutletListPresenter, IOutletListPre
         mView.ConnectionFeedback(false);
     }
 
+    /**
+     * @author  Martin J. J.
+     * @since   11/20/2019
+     * @status  Defined
+     */
     @Override
     public void websocketConnectionSucces() {
         mView.ConnectionFeedback(true);

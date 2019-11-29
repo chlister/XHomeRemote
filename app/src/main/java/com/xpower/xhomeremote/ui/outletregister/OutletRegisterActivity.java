@@ -59,6 +59,7 @@ public class OutletRegisterActivity extends BaseActivity implements IOutletRegis
 
         ArrayAdapter<HomeApplianceType> adapter = new ArrayAdapter<HomeApplianceType>(this, android.R.layout.simple_list_item_1, HomeApplianceType.values());
         mTypeSpinner.setAdapter(adapter);
+        mTypeSpinner.setSelection(item.type.ordinal());
 
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override

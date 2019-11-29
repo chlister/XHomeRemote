@@ -2,7 +2,7 @@ package com.xpower.xhomeremote.data.websocket;
 
 import com.xpower.message.Message;
 import com.xpower.message.MethodCode;
-import com.xpower.message.model.SocketDTO;
+import com.xpower.message.model.OutletDTO;
 import com.xpower.xhomeremote.data.model.HomeApplianceType;
 import com.xpower.xhomeremote.data.model.Outlet;
 import com.xpower.xhomeremote.data.websocket.callback.IWebsocketConnectionFailed;
@@ -85,11 +85,17 @@ public class WebSocketManager implements IWebSocketCallback, IWebSocketManager {
     }
 
     @Override
-    public void registerSocket(Outlet outlet) {
-        SocketDTO data = new SocketDTO(outlet.id, outlet.agentId, outlet.name, outlet.type.name());
+    public void registerOutlet(Outlet outlet) {
+        OutletDTO data = new OutletDTO(outlet.id, outlet.agentId, outlet.name, outlet.type.name(), outlet.state);
         Message m = new Message(null, MethodCode.REGISTER, data );
         if(mWebSocketConnection != null)
             mWebSocketConnection.send(m.encode());
+    }
+
+    @Override
+    public void updateOutelet(Outlet outlet) {
+        OutletDTO data = new OutletDTO(outlet.id, outlet.agentId, outlet.name, outlet.type.name(), outlet.state);
+        Message m = new Message(null, null, data); //Todo: change methodCode
     }
 
     @Override
@@ -118,10 +124,10 @@ public class WebSocketManager implements IWebSocketCallback, IWebSocketManager {
 
 
     @Override
-    public void receiveSockets(List<SocketDTO> sockets) {
+    public void receiveSockets(List<OutletDTO> sockets) {
         List<Outlet> list = new ArrayList<>();
-        for (SocketDTO s: sockets) {
-            list.add(new Outlet(s.getId(), s.getAgentId(), s.getName(), HomeApplianceType.valueOf(s.getApplianceType())));
+        for (OutletDTO s: sockets) {
+            list.add(new Outlet(s.getId(), s.getAgentId(), s.getName(), HomeApplianceType.valueOf(s.getApplianceType()), s.getState()));
         }
         mReceiveSocketCallback.receiveOutlets(list);
     }

@@ -14,6 +14,7 @@ public interface IWebSocketManager {
     
     void startSocketConnection();
     void getOutlets();
-    void registerSocket(Outlet outlet);
+    void registerOutlet(Outlet outlet);
+    void updateOutelet(Outlet outlet);
     void setIps(String internal, String external);
 }

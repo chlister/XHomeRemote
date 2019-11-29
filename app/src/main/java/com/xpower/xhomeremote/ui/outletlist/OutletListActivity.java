@@ -99,7 +99,7 @@ public class OutletListActivity extends BaseActivity implements IOutletListView,
      */
     @Override
     public void onItemClick(Outlet item) {
-
+        showMessage("Hold nede på kort for a registrere outlet");
     }
 
     /**

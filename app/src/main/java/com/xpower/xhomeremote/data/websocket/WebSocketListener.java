@@ -8,10 +8,12 @@
 package com.xpower.xhomeremote.data.websocket;
 
 import android.util.Log;
+import android.widget.Switch;
 
 import com.google.gson.internal.LinkedTreeMap;
 import com.xpower.message.Message;
 import com.xpower.message.MethodCode;
+import com.xpower.message.RespondCodes;
 import com.xpower.message.model.OutletDTO;
 
 import java.util.ArrayList;
@@ -58,8 +60,21 @@ public final class WebSocketListener extends okhttp3.WebSocketListener {
         super.onMessage(webSocket, text);
         Log.i(TAG, "onMessage: " + text);
         Message m = new Message(text);
-        if(m.getMethodCode().equals(MethodCode.GET_SOCKETS))
-            callback.receiveSockets(OutletDTO.deserialize((ArrayList<LinkedTreeMap>) m.getObj()));
+        switch(m.getMethodCode())
+        {
+            case GET_SOCKETS:
+                if(m.getRespondCodes() == RespondCodes.OK)
+                    callback.receiveSockets(OutletDTO.deserialize((ArrayList<LinkedTreeMap>) m.getObj()));
+                break;
+
+            case REGISTER:
+                    callback.registerconnection(m.getRespondCodes() == RespondCodes.OK);
+                break;
+
+            case CHANGE_SOCKET_STATE:
+                break;
+
+        }
     }
 
     /**

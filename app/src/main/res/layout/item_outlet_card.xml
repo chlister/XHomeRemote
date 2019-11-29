@@ -2,8 +2,12 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="fill_parent"
-    android:layout_height="140dp" android:layout_margin="16dp">
+    android:layout_width="fill_parent"
+    android:layout_height="140dp"
+    android:layout_margin="16dp"
+    android:orientation="vertical"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -11,8 +15,8 @@
 
         <ImageView
             android:id="@+id/OutletViewAdapter_Outlet_ImageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -34,26 +38,26 @@
             android:id="@+id/OutletViewAdapter_agentID_ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/OutletViewAdapter_Name"
+            android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:orientation="horizontal">
+            app:layout_constraintTop_toBottomOf="@+id/OutletViewAdapter_Name">
 
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
                 android:text="@string/outletcard_agentId"
-                android:textSize="14sp"
-                android:layout_marginLeft="8dp"/>
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/OutletViewAdapter_AgentID"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
-                android:textSize="14sp"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textSize="14sp" />
 
 
         </LinearLayout>
@@ -62,26 +66,26 @@
             android:id="@+id/OutletViewAdapter_OutletID_ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/OutletViewAdapter_agentID_ll"
+            android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:orientation="horizontal">
+            app:layout_constraintTop_toBottomOf="@+id/OutletViewAdapter_agentID_ll">
 
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
                 android:text="@string/outletcard_outletId"
-                android:textSize="14sp"
-                android:layout_marginLeft="8dp"/>
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/OutletViewAdapter_OutletID"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
-                android:textSize="14sp"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -89,10 +93,10 @@
             android:id="@+id/OutletViewAdapter_type_ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/OutletViewAdapter_OutletID_ll"
+            android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:orientation="horizontal">
+            app:layout_constraintTop_toBottomOf="@+id/OutletViewAdapter_OutletID_ll">
 
 
             <TextView
@@ -108,12 +112,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
-                android:textSize="14sp"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textSize="14sp" />
 
 
         </LinearLayout>
-
 
 
         <Switch

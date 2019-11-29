@@ -52,20 +52,20 @@ public class OutletRegisterActivity extends BaseActivity implements IOutletRegis
 
         item = (Outlet) getIntent().getSerializableExtra(DATA_INTENT_OUTLET);
 
-        mTypeTextView.setText(item.type.name());
+        mTypeTextView.setText(item.type.name);
         mAgentIdTextView.setText(Integer.toString(item.agentId));
         mOutletIdTextView.setText(Integer.toString(item.id));
         mNameEditText.setText(item.name);
 
-        ArrayAdapter<HomeApplianceType> adapter = new ArrayAdapter<HomeApplianceType>(this, android.R.layout.simple_list_item_1, HomeApplianceType.values());
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, HomeApplianceType.getHomeApplianceNames());
         mTypeSpinner.setAdapter(adapter);
-        mTypeSpinner.setSelection(item.type.ordinal());
+        mTypeSpinner.setSelection(0);
 
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 item.name = mNameEditText.getText().toString();
-                item.type = HomeApplianceType.valueOf(mTypeSpinner.getSelectedItem().toString());
+                item.type = HomeApplianceType.getType(mTypeSpinner.getSelectedItem().toString());
                 presenter.registerOutlet(item);
             }
         });

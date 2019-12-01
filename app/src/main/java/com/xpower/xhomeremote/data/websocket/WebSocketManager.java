@@ -21,7 +21,6 @@ public class WebSocketManager implements IWebSocketCallback, IWebSocketManager {
     private static WebSocketManager instance = null;
     private IWebsocketConnectionSuccess mSuccesCallback;
     private IWebsocketConnectionFailed mFailedCallback;
-
     private IWebsocketReceiveOutlet mReceiveSocketCallback;
 
 

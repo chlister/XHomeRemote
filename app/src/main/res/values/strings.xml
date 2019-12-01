@@ -12,4 +12,6 @@
     <string name="action_search">Søg</string>
     <string name="search_hint">Lys...</string>
     <string name="registerOutletTitle">Register Outlet</string>
+    <string name="internalIP">Internal IP:</string>
+    <string name="externalIP">External IP:</string>
 </resources>

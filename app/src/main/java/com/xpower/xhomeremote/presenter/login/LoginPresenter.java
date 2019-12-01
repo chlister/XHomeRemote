@@ -17,7 +17,7 @@ public class LoginPresenter implements ILoginPresenter, ILoginPresenterCallback 
 
     @Override
     public void establishConnection(String user, String password){
-        mWebSocketManager.setIps("ws://192.168.1.127:80/x/home", "wss://echo.websocket.org");
+        mWebSocketManager.setIps(user, password);
         mWebSocketManager.startSocketConnection();
     }
 

@@ -21,12 +21,17 @@ public class OutletRegisterPresenter implements IOutletRegisterPresneterCallback
     }
 
     @Override
-    public void onRegisterComplete() {
-        mView.registerSuccesfull();
+    public void onRegisterSuccess() {
+        mView.onRegisterSuccess();
     }
 
     @Override
-    public void websocketConnectionFailed() {
-        mView.registerFailed();
+    public void onRegisterFailed(String msg) {
+        mView.onRegisterFailed();
+    }
+
+    @Override
+    public void onWebsocketConnectionFailed(String msg) {
+        mView.onConnectionFailed(msg);
     }
 }

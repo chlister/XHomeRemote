@@ -1,5 +1,5 @@
 package com.xpower.xhomeremote.data.websocket.callback;
 
 public interface IWebsocketConnectionSuccess {
-    void websocketConnectionSucces();
+    void onWebsocketConnectionSuccess();
 }

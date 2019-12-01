@@ -21,17 +21,16 @@ import com.xpower.xhomeremote.R;
 import com.xpower.xhomeremote.data.model.Outlet;
 import com.xpower.xhomeremote.presenter.outletlist.IOutletListPresenter;
 import com.xpower.xhomeremote.presenter.outletlist.MockOutletListPresenter;
-import com.xpower.xhomeremote.presenter.outletlist.OutletListPresenter;
 import com.xpower.xhomeremote.ui.base.BaseActivity;
 import com.xpower.xhomeremote.ui.outletregister.OutletRegisterActivity;
 
 import java.util.List;
 
-public class OutletListActivity extends BaseActivity implements IOutletListView, OutletViewAdapter.onClickListner {
+public class OutletListActivity extends BaseActivity implements IOutletListView, OutletViewAdapter.ICardClickListner {
     private RecyclerView mRecyclerView;
     private OutletViewAdapter mOutletViewAdapter;
     private IOutletListPresenter mOutletPresenter;
-    private SearchView searchView;
+    private SearchView mSearchView;
 
     /**
      * @author  Martin J. J.
@@ -71,14 +70,14 @@ public class OutletListActivity extends BaseActivity implements IOutletListView,
 
         // Associate searchable configuration with the SearchView
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        searchView = (SearchView) menu.findItem(R.id.action_search)
+        mSearchView = (SearchView) menu.findItem(R.id.action_search)
                 .getActionView();
-        searchView.setSearchableInfo(searchManager
+        mSearchView.setSearchableInfo(searchManager
                 .getSearchableInfo(getComponentName()));
-        searchView.setMaxWidth(Integer.MAX_VALUE);
+        mSearchView.setMaxWidth(Integer.MAX_VALUE);
 
         // listening to search query text change
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 // filter recycler view when query submitted
@@ -103,16 +102,12 @@ public class OutletListActivity extends BaseActivity implements IOutletListView,
      * @status  Under Development
      */
     @Override
-    public void updateOutletList(List<Outlet> outlets) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                mOutletViewAdapter.setData(outlets);
-                mOutletViewAdapter.notifyDataSetChanged();
-            }
+    public void onOutletDataReceived(List<Outlet> outlets) {
+        runOnUiThread(() -> {
+            mOutletViewAdapter.setData(outlets);
+            mOutletViewAdapter.notifyDataSetChanged();
         });
     }
-
 
     /**
      * @author  Martin J. J.
@@ -121,19 +116,10 @@ public class OutletListActivity extends BaseActivity implements IOutletListView,
      * @status  Under Development
      */
     @Override
-    public void ConnectionFeedback(final boolean b) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if(b) {
-                    showMessage("Connection OK");
-                    mOutletPresenter.getOutlets();
-                }
-                else
-                    showMessage("Connection Failed");
-            }
-        });
+    public void onConnectionFailed(String msg) {
+        runOnUiThread(() -> showMessage(msg));
     }
+
 
     /**
      * @author  Martin J. J.
@@ -143,7 +129,7 @@ public class OutletListActivity extends BaseActivity implements IOutletListView,
      */
     @Override
     public void onItemClick(Outlet item) {
-        showMessage("Hold nede på kort for a registrere outlet");
+        showMessage(this.getString(R.string.outletlist_onitemclick_message));
     }
 
     /**
@@ -159,8 +145,16 @@ public class OutletListActivity extends BaseActivity implements IOutletListView,
         startActivity(i);
     }
 
+    /**
+     * @author  Martin J. J.
+     * @version 1.0
+     * @since   11/20/2019
+     * @status  Under Development
+     */
     @Override
     public void onChangeListener(Outlet item, boolean isChecked) {
         mOutletPresenter.changeState(item, isChecked);
     }
+
+
 }

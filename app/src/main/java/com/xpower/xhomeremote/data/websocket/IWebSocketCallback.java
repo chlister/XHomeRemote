@@ -6,15 +6,17 @@ import java.util.List;
 
 import okhttp3.WebSocket;
 
-public interface IWebSocketCallback {
-    void receiveSockets(List<OutletDTO> sockets);
+public interface IWebSocketCallback  {
+    void onReceiveSockets(List<OutletDTO> sockets);
 
-    void registerconnection(boolean success);
+    void onRegisterSuccess();
 
-    void internalConnectionFailed();
+    void onRegisterFailed();
 
-    void externalConnectionFailed();
+    void onInternalConnectionFailed();
 
-    void connectEstablis(WebSocket wSocket);
+    void onExternalConnectionFailed();
+
+    void onConnectionSucces(WebSocket wSocket);
 }
 

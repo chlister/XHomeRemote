@@ -5,5 +5,5 @@ import com.xpower.xhomeremote.data.model.Outlet;
 import java.util.List;
 
 public interface IWebsocketReceiveOutlet {
-    void receiveOutlets(List<Outlet> outlets);
+    void onReceiveOutlet(List<Outlet> outlets);
 }

@@ -1,7 +1,9 @@
 package com.xpower.xhomeremote.ui.outletregister;
 
-public interface IOutletRegisterView {
-    void registerSuccesfull();
+import com.xpower.xhomeremote.ui.base.IBaseActivity;
 
-    void registerFailed();
+public interface IOutletRegisterView extends IBaseActivity {
+    void onRegisterSuccess();
+
+    void onRegisterFailed();
 }

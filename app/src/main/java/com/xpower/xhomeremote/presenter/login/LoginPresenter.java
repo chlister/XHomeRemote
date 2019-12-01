@@ -16,18 +16,20 @@ public class LoginPresenter implements ILoginPresenter, ILoginPresenterCallback 
     }
 
     @Override
-    public void establishConnection(String user, String password){
+    public void login(String user, String password){
         mWebSocketManager.setIps(user, password);
         mWebSocketManager.startSocketConnection();
     }
 
-    @Override
-    public void websocketConnectionFailed() {
 
+
+    @Override
+    public void onWebsocketConnectionSuccess() {
+        mView.onConnectionSuccess();
     }
 
     @Override
-    public void websocketConnectionSucces() {
-        mView.connectionSuccess();
+    public void onWebsocketConnectionFailed(String msg) {
+        mView.onConnectionFailed(msg);
     }
 }

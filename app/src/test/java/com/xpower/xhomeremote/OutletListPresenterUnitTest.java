@@ -18,7 +18,7 @@ public class OutletListPresenterUnitTest {
     public void getOutletsTest() {
         IOutletListPresenter presenter = new OutletListPresenter(new IOutletListView() {
             @Override
-            public void updateOutletList(List<Outlet> outlets) {
+            public void onOutletDataReceived(List<Outlet> outlets) {
                 assertEquals(7, outlets.size());
                 assertEquals(new Outlet(1, 2, "OtherBathLight", HomeApplianceType.LIGHT).toString(), outlets.get(1).toString());
             }

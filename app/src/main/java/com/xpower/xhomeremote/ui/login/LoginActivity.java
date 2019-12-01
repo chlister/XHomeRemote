@@ -12,36 +12,28 @@ import com.xpower.xhomeremote.ui.base.BaseActivity;
 import com.xpower.xhomeremote.ui.outletlist.OutletListActivity;
 
 public class LoginActivity extends BaseActivity implements ILoginView {
-    private ILoginPresenter presenter;
-    private EditText internalET, externalET;
+    private ILoginPresenter mPresenter;
+    private EditText mInternalIpEditView, mExternalIpEditView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        presenter = new LoginPresenter(this);
+        mPresenter = new LoginPresenter(this);
         findViewById(R.id.login_bnt).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.establishConnection(internalET.getText().toString(),externalET.getText().toString());
+                mPresenter.login(mInternalIpEditView.getText().toString(), mExternalIpEditView.getText().toString());
             }
         });
-        internalET = findViewById(R.id.login_internal);
-        externalET = findViewById(R.id.login_external);
+        mInternalIpEditView = findViewById(R.id.login_internal);
+        mExternalIpEditView = findViewById(R.id.login_external);
+        if(getIntent().getFlags() == Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            showMessage(getString(R.string.login_connectionfailed));
     }
 
     @Override
-    public void connectionFailed(String msg){
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                    showMessage("Connection Failed");
-            }
-        });
-    }
-
-    @Override
-    public void connectionSuccess(){
+    public void onConnectionSuccess(){
         Intent i = new Intent(this, OutletListActivity.class);
         startActivity(i);
     }

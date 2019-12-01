@@ -34,7 +34,7 @@ public class OutletViewAdapter extends RecyclerView.Adapter<OutletViewAdapter.Vi
     private List<Outlet> mData;
     private List<Outlet> mFilteredData;
     private LayoutInflater mInflater;
-    private static onClickListner mOnclicklistner;
+    private static ICardClickListner mOnclicklistner;
     private Context mContext;
 
     /**
@@ -98,8 +98,8 @@ public class OutletViewAdapter extends RecyclerView.Adapter<OutletViewAdapter.Vi
             holder.mTypeTextView.setText(mFilteredData.get(position).type.name);
             holder.mTypeHeadTextView.setVisibility(View.VISIBLE);
         }
-        onClickListner temp = mOnclicklistner;
-        setOnItemClickListener(getDummyonLick());
+        ICardClickListner temp = mOnclicklistner;
+        setOnItemClickListener(getEmptyICardClickListner());
         holder.mSwitchView.setChecked(mFilteredData.get(position).state);
         setOnItemClickListener(temp);
         if(mFilteredData.get(position).state)
@@ -108,8 +108,9 @@ public class OutletViewAdapter extends RecyclerView.Adapter<OutletViewAdapter.Vi
             holder.mImageView.setImageResource(mFilteredData.get(position).type.offRessource);
     }
 
-    public static onClickListner getDummyonLick(){
-        return new onClickListner() {
+
+    public static ICardClickListner getEmptyICardClickListner(){
+        return new ICardClickListner() {
             @Override
             public void onItemClick(Outlet item) {
 
@@ -143,7 +144,7 @@ public class OutletViewAdapter extends RecyclerView.Adapter<OutletViewAdapter.Vi
      * @since   11/20/2019
      * @status  Under Development
      */
-    public void setOnItemClickListener(onClickListner onclicklistner) {
+    public void setOnItemClickListener(ICardClickListner onclicklistner) {
         this.mOnclicklistner = onclicklistner;
     }
 
@@ -187,7 +188,7 @@ public class OutletViewAdapter extends RecyclerView.Adapter<OutletViewAdapter.Vi
      * @since   11/20/2019
      * @status  Under Development
      */
-    public interface onClickListner {
+    public interface ICardClickListner {
         void onItemClick(Outlet item);
         void onItemLongClick(Outlet item);
         void onChangeListener(Outlet item, boolean isChecked);

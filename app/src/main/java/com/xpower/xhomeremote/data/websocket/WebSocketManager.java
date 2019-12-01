@@ -71,7 +71,7 @@ public class WebSocketManager implements IWebSocketCallback, IWebSocketManager {
             }
         }
         else{
-            mSuccesCallback.websocketConnectionSucces();
+            mSuccesCallback.onWebsocketConnectionSuccess();
         }
 
     }
@@ -106,39 +106,41 @@ public class WebSocketManager implements IWebSocketCallback, IWebSocketManager {
     }
 
     @Override
-    public void internalConnectionFailed() {
+    public void onInternalConnectionFailed() {
         if(mInternIp != null){
             mClient.newWebSocket(new Request.Builder().url(mExternIp).build(),mWebSocketListener );
         }
     }
 
     @Override
-    public void externalConnectionFailed() {
-        mFailedCallback.websocketConnectionFailed();
+    public void onExternalConnectionFailed() {
+        mFailedCallback.onWebsocketConnectionFailed("");
     }
 
     @Override
-    public void connectEstablis(WebSocket wSocket) {
+    public void onConnectionSucces(WebSocket wSocket) {
         mWebSocketConnection = wSocket;
-        mSuccesCallback.websocketConnectionSucces();
+        mSuccesCallback.onWebsocketConnectionSuccess();
     }
 
 
     @Override
-    public void receiveSockets(List<OutletDTO> sockets) {
+    public void onReceiveSockets(List<OutletDTO> sockets) {
         List<Outlet> list = new ArrayList<>();
         for (OutletDTO s: sockets) {
             list.add(new Outlet(s.getId(), s.getAgentId(), s.getName(), HomeApplianceType.getType(s.getApplianceType()), s.getState()));
         }
-        mReceiveSocketCallback.receiveOutlets(list);
+        mReceiveSocketCallback.onReceiveOutlet(list);
     }
 
     @Override
-    public void registerconnection(boolean success) {
-        if(success)
-            mRegisterCallback.onRegisterComplete();
-        else
-            mFailedCallback.websocketConnectionFailed(); //TODO: custom callback
+    public void onRegisterSuccess() {
+        mRegisterCallback.onRegisterSuccess();
+    }
+
+    @Override
+    public void onRegisterFailed() {
+        mRegisterCallback.onRegisterFailed("");
     }
 
 }

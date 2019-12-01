@@ -26,10 +26,8 @@ public class OutletListPresenter implements IOutletListPresenter, IOutletListPre
     public OutletListPresenter(IOutletListView view){
         mView = view;
         mWebSocketManager = WebSocketManager.getInstance();
-        mWebSocketManager.setSuccesCallback(this);
         mWebSocketManager.setFailedCallback(this);
         mWebSocketManager.setReceiveOutletCallback(this);
-        //mWebSocketManager.startSocketConnection();
     }
 
     /**
@@ -60,8 +58,8 @@ public class OutletListPresenter implements IOutletListPresenter, IOutletListPre
      * @status  Ready for Review
      */
     @Override
-    public void receiveOutlets(List<Outlet> outlets) {
-        mView.updateOutletList(outlets);
+    public void onReceiveOutlet(List<Outlet> outlets) {
+        mView.onOutletDataReceived(outlets);
     }
 
     /**
@@ -70,17 +68,7 @@ public class OutletListPresenter implements IOutletListPresenter, IOutletListPre
      * @status  Defined
      */
     @Override
-    public void websocketConnectionFailed() {
-        mView.ConnectionFeedback(false);
-    }
-
-    /**
-     * @author  Martin J. J.
-     * @since   11/20/2019
-     * @status  Defined
-     */
-    @Override
-    public void websocketConnectionSucces() {
-        mView.ConnectionFeedback(true);
+    public void onWebsocketConnectionFailed(String msg) {
+        mView.onConnectionFailed(msg);
     }
 }

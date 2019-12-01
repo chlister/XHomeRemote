@@ -39,10 +39,16 @@ public class MockOutletListPresenter implements IOutletListPresenter {
         data.add(new Outlet(1,0, "MY PC", HomeApplianceType.getType("laptop"), false));
         data.add(new Outlet(2,3, "Laptop", HomeApplianceType.getType("laptop"), false));
 
-        mView.updateOutletList(data);
+        mView.onOutletDataReceived(data);
 
     }
 
+    /**
+     * @author  Martin J. J.
+     * @version 1.0
+     * @since   11/20/2019
+     * @status  Under Development
+     */
     @Override
     public void changeState(Outlet outlet, boolean isChecked){
         int i = 1;

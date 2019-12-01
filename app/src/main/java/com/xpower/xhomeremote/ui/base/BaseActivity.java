@@ -8,6 +8,7 @@
 package com.xpower.xhomeremote.ui.base;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -16,6 +17,7 @@ import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.xpower.xhomeremote.R;
+import com.xpower.xhomeremote.ui.login.LoginActivity;
 
 public abstract class BaseActivity extends AppCompatActivity implements IBaseActivity {
     private ProgressDialog mProgress;
@@ -88,4 +90,10 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
         showMessage(getString(resId));
     }
 
+    @Override
+    public void onConnectionFailed(String msg) {
+        Intent i=new Intent(this, LoginActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(i);
+    }
 }

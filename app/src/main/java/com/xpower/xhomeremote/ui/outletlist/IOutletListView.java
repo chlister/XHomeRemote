@@ -8,10 +8,11 @@
 package com.xpower.xhomeremote.ui.outletlist;
 
 import com.xpower.xhomeremote.data.model.Outlet;
+import com.xpower.xhomeremote.ui.base.IBaseActivity;
 
 import java.util.List;
 
-public interface IOutletListView {
-    void updateOutletList(List<Outlet> outlets);
-    void ConnectionFeedback(boolean b);
+public interface IOutletListView extends IBaseActivity {
+    void onOutletDataReceived(List<Outlet> outlets);
+    void onConnectionFailed(String msg);
 }

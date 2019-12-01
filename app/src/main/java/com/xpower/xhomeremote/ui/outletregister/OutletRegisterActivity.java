@@ -27,11 +27,11 @@ import com.xpower.xhomeremote.ui.base.BaseActivity;
 public class OutletRegisterActivity extends BaseActivity implements IOutletRegisterView {
     public static final String DATA_INTENT_OUTLET = "DATA_INTENT_OUTLET";
     private IOutletRegisterPresenter presenter;
-    TextView mTypeTextView, mAgentIdTextView, mOutletIdTextView;
-    ImageView mIconView;
-    EditText mNameEditText;
-    Spinner mTypeSpinner;
-    Button mButton;
+    private TextView mTypeTextView, mAgentIdTextView, mOutletIdTextView;
+    private ImageView mIconView;
+    private EditText mNameEditText;
+    private Spinner mTypeSpinner;
+    private Button mRegisterButton;
 
     private Outlet item;
 
@@ -55,7 +55,7 @@ public class OutletRegisterActivity extends BaseActivity implements IOutletRegis
         mOutletIdTextView = findViewById(R.id.register_OutletID);
         mNameEditText = findViewById(R.id.register_Name_input);
         mTypeSpinner = findViewById(R.id.register_Type_spinner);
-        mButton = findViewById(R.id.register_button);
+        mRegisterButton = findViewById(R.id.register_button);
         mIconView = findViewById(R.id.register_iconView);
 
 
@@ -75,7 +75,7 @@ public class OutletRegisterActivity extends BaseActivity implements IOutletRegis
         mTypeSpinner.setAdapter(adapter);
         mTypeSpinner.setSelection(0);
 
-        mButton.setOnClickListener(new View.OnClickListener() {
+        mRegisterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 item.name = mNameEditText.getText().toString();
@@ -86,23 +86,13 @@ public class OutletRegisterActivity extends BaseActivity implements IOutletRegis
     }
 
     @Override
-    public void registerSuccesfull(){
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                showMessage("Outlet Updated");
-            }
-        });
+    public void onRegisterSuccess(){
+        runOnUiThread(() -> showMessage("Outlet Updated"));
         finish();
     }
 
     @Override
-    public void registerFailed(){
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                showMessage("Register failed");
-            }
-        });
+    public void onRegisterFailed(){
+        runOnUiThread(() -> showMessage("Register failed"));
     }
 }

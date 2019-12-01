@@ -17,4 +17,6 @@ public interface IBaseActivity {
     void showMessage(String message);
 
     void showMessage(@StringRes int resId);
+
+    void onConnectionFailed(String msg);
 }

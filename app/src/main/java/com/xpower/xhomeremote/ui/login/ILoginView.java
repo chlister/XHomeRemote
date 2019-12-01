@@ -1,7 +1,7 @@
 package com.xpower.xhomeremote.ui.login;
 
-public interface ILoginView {
-    void connectionFailed(String msg);
+import com.xpower.xhomeremote.ui.base.IBaseActivity;
 
-    void connectionSuccess();
+public interface ILoginView extends IBaseActivity {
+    void onConnectionSuccess();
 }

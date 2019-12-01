@@ -11,8 +11,11 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import androidx.appcompat.widget.Toolbar;
 
 import com.xpower.xhomeremote.R;
 import com.xpower.xhomeremote.data.model.HomeApplianceType;
@@ -25,6 +28,7 @@ public class OutletRegisterActivity extends BaseActivity implements IOutletRegis
     public static final String DATA_INTENT_OUTLET = "DATA_INTENT_OUTLET";
     private IOutletRegisterPresenter presenter;
     TextView mTypeTextView, mAgentIdTextView, mOutletIdTextView;
+    ImageView mIconView;
     EditText mNameEditText;
     Spinner mTypeSpinner;
     Button mButton;
@@ -41,7 +45,10 @@ public class OutletRegisterActivity extends BaseActivity implements IOutletRegis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_outlet_register);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         presenter = new OutletRegisterPresenter(this);
+        getSupportActionBar().setTitle(this.getString(R.string.registerOutletTitle));
 
         mTypeTextView = findViewById(R.id.register_Type);
         mAgentIdTextView = findViewById(R.id.register_AgentID);
@@ -49,6 +56,9 @@ public class OutletRegisterActivity extends BaseActivity implements IOutletRegis
         mNameEditText = findViewById(R.id.register_Name_input);
         mTypeSpinner = findViewById(R.id.register_Type_spinner);
         mButton = findViewById(R.id.register_button);
+        mIconView = findViewById(R.id.register_iconView);
+
+
 
         item = (Outlet) getIntent().getSerializableExtra(DATA_INTENT_OUTLET);
 
@@ -56,6 +66,10 @@ public class OutletRegisterActivity extends BaseActivity implements IOutletRegis
         mAgentIdTextView.setText(Integer.toString(item.agentId));
         mOutletIdTextView.setText(Integer.toString(item.id));
         mNameEditText.setText(item.name);
+        if(item.state)
+            mIconView.setImageResource(item.type.onRessource);
+        else
+            mIconView.setImageResource(item.type.offRessource);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, HomeApplianceType.getHomeApplianceNames());
         mTypeSpinner.setAdapter(adapter);

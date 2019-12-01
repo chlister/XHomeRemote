@@ -12,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Switch;
@@ -27,8 +29,10 @@ import com.xpower.xhomeremote.data.model.Outlet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OutletViewAdapter extends RecyclerView.Adapter<OutletViewAdapter.ViewHolder> {
+public class OutletViewAdapter extends RecyclerView.Adapter<OutletViewAdapter.ViewHolder>
+        implements Filterable {
     private List<Outlet> mData;
+    private List<Outlet> mFilteredData;
     private LayoutInflater mInflater;
     private static onClickListner mOnclicklistner;
     private Context mContext;
@@ -51,6 +55,7 @@ public class OutletViewAdapter extends RecyclerView.Adapter<OutletViewAdapter.Vi
      */
     public void setData(List<Outlet> data){
         this.mData = data;
+        this.mFilteredData = data;
     }
 
     /**
@@ -72,35 +77,35 @@ public class OutletViewAdapter extends RecyclerView.Adapter<OutletViewAdapter.Vi
      */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        if(mData.get(position).name.isEmpty()){
+        if(mFilteredData.get(position).name.isEmpty()){
             holder.mNameTextView.setVisibility(View.GONE);
             holder.mAgentIdLayout.setVisibility(View.VISIBLE);
             holder.mOutletIdLayout.setVisibility(View.VISIBLE);
-            holder.mAgentIdTextView.setText(Integer.toString(mData.get(position).agentId));
-            holder.mOutletIdTextView.setText(Integer.toString(mData.get(position).id));
+            holder.mAgentIdTextView.setText(Integer.toString(mFilteredData.get(position).agentId));
+            holder.mOutletIdTextView.setText(Integer.toString(mFilteredData.get(position).id));
         }
         else{
             holder.mNameTextView.setVisibility(View.VISIBLE);
             holder.mAgentIdLayout.setVisibility(View.GONE);
             holder.mOutletIdLayout.setVisibility(View.GONE);
-            holder.mNameTextView.setText(mData.get(position).name);
+            holder.mNameTextView.setText(mFilteredData.get(position).name);
         }
-        if(mData.get(position).type == HomeApplianceType.getNonType()){
+        if(mFilteredData.get(position).type == HomeApplianceType.getNonType()){
             holder.mTypeTextView.setText(mContext.getString(R.string.not_registered));
             holder.mTypeHeadTextView.setVisibility(View.GONE);
         }
         else {
-            holder.mTypeTextView.setText(mData.get(position).type.name);
+            holder.mTypeTextView.setText(mFilteredData.get(position).type.name);
             holder.mTypeHeadTextView.setVisibility(View.VISIBLE);
         }
         onClickListner temp = mOnclicklistner;
         setOnItemClickListener(getDummyonLick());
-        holder.mSwitchView.setChecked(mData.get(position).state);
+        holder.mSwitchView.setChecked(mFilteredData.get(position).state);
         setOnItemClickListener(temp);
-        if(mData.get(position).state)
-            holder.mImageView.setImageResource(mData.get(position).type.onRessource);
+        if(mFilteredData.get(position).state)
+            holder.mImageView.setImageResource(mFilteredData.get(position).type.onRessource);
         else
-            holder.mImageView.setImageResource(mData.get(position).type.offRessource);
+            holder.mImageView.setImageResource(mFilteredData.get(position).type.offRessource);
     }
 
     public static onClickListner getDummyonLick(){
@@ -130,7 +135,7 @@ public class OutletViewAdapter extends RecyclerView.Adapter<OutletViewAdapter.Vi
      */
     @Override
     public int getItemCount() {
-        return mData.size();
+        return mFilteredData.size();
     }
 
     /**
@@ -140,6 +145,41 @@ public class OutletViewAdapter extends RecyclerView.Adapter<OutletViewAdapter.Vi
      */
     public void setOnItemClickListener(onClickListner onclicklistner) {
         this.mOnclicklistner = onclicklistner;
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String charString = charSequence.toString();
+                if (charString.isEmpty()) {
+                    mFilteredData = mData;
+                } else {
+                    List<Outlet> filteredList = new ArrayList<>();
+                    for (Outlet outlet : mData) {
+
+                        // name match condition. this might differ depending on your requirement
+                        // here we are looking for name or phone number match
+                        if (outlet.name.toLowerCase().contains(charString.toLowerCase()) || outlet.type.name.toLowerCase().contains(charString.toLowerCase()) || Integer.toString(outlet.agentId).contains(charSequence) || Integer.toString(outlet.id).contains(charSequence) ) {
+                            filteredList.add(outlet);
+                        }
+                    }
+
+                    mFilteredData = filteredList;
+                }
+
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = mFilteredData;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                mFilteredData = (ArrayList<Outlet>) results.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 
     /**
@@ -197,7 +237,7 @@ public class OutletViewAdapter extends RecyclerView.Adapter<OutletViewAdapter.Vi
          */
         @Override
         public void onClick(View v) {
-            mOnclicklistner.onItemClick(mData.get(getAdapterPosition()));
+            mOnclicklistner.onItemClick(mFilteredData.get(getAdapterPosition()));
         }
 
         /**
@@ -207,7 +247,7 @@ public class OutletViewAdapter extends RecyclerView.Adapter<OutletViewAdapter.Vi
          */
         @Override
         public boolean onLongClick(View v) {
-            mOnclicklistner.onItemLongClick(mData.get(getAdapterPosition()));
+            mOnclicklistner.onItemLongClick(mFilteredData.get(getAdapterPosition()));
             return false;
         }
 
@@ -218,7 +258,7 @@ public class OutletViewAdapter extends RecyclerView.Adapter<OutletViewAdapter.Vi
          */
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            mOnclicklistner.onChangeListener(mData.get(getAdapterPosition()), isChecked);
+            mOnclicklistner.onChangeListener(mFilteredData.get(getAdapterPosition()), isChecked);
         }
     }
 }

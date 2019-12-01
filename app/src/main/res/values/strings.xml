@@ -7,4 +7,9 @@
     <string name="outletcard_name">Name:</string>
     <string name="not_registered">Not Registered</string>
     <string name="register">Register</string>
+    <string name="action_settings">Settings</string>
+    <string name="toolbar_title">Outlets</string>
+    <string name="action_search">Søg</string>
+    <string name="search_hint">Lys...</string>
+    <string name="registerOutletTitle">Register Outlet</string>
 </resources>

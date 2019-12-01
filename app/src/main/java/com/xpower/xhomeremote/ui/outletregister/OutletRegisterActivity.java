@@ -18,6 +18,7 @@ import android.widget.TextView;
 import androidx.appcompat.widget.Toolbar;
 
 import com.xpower.xhomeremote.R;
+import com.xpower.xhomeremote.XHomeRemote;
 import com.xpower.xhomeremote.data.model.HomeApplianceType;
 import com.xpower.xhomeremote.data.model.Outlet;
 import com.xpower.xhomeremote.presenter.outletregister.IOutletRegisterPresenter;
@@ -26,7 +27,7 @@ import com.xpower.xhomeremote.ui.base.BaseActivity;
 
 public class OutletRegisterActivity extends BaseActivity implements IOutletRegisterView {
     public static final String DATA_INTENT_OUTLET = "DATA_INTENT_OUTLET";
-    private IOutletRegisterPresenter presenter;
+    private IOutletRegisterPresenter mPresenter;
     private TextView mTypeTextView, mAgentIdTextView, mOutletIdTextView;
     private ImageView mIconView;
     private EditText mNameEditText;
@@ -47,7 +48,7 @@ public class OutletRegisterActivity extends BaseActivity implements IOutletRegis
         setContentView(R.layout.activity_outlet_register);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        presenter = new OutletRegisterPresenter(this);
+        mPresenter = new OutletRegisterPresenter(this);
         getSupportActionBar().setTitle(this.getString(R.string.registerOutletTitle));
 
         mTypeTextView = findViewById(R.id.register_Type);
@@ -80,9 +81,15 @@ public class OutletRegisterActivity extends BaseActivity implements IOutletRegis
             public void onClick(View v) {
                 item.name = mNameEditText.getText().toString();
                 item.type = HomeApplianceType.getType(mTypeSpinner.getSelectedItem().toString());
-                presenter.registerOutlet(item);
+                mPresenter.registerOutlet(item);
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mPresenter = ((XHomeRemote)getApplication()).getOutletRegisterPresenter(this);
     }
 
     @Override

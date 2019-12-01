@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.xpower.xhomeremote.R;
+import com.xpower.xhomeremote.XHomeRemote;
 import com.xpower.xhomeremote.presenter.login.ILoginPresenter;
 import com.xpower.xhomeremote.presenter.login.LoginPresenter;
 import com.xpower.xhomeremote.ui.base.BaseActivity;
@@ -19,7 +20,7 @@ public class LoginActivity extends BaseActivity implements ILoginView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        mPresenter = new LoginPresenter(this);
+
         findViewById(R.id.login_bnt).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -28,8 +29,14 @@ public class LoginActivity extends BaseActivity implements ILoginView {
         });
         mInternalIpEditView = findViewById(R.id.login_internal);
         mExternalIpEditView = findViewById(R.id.login_external);
+
         if(getIntent().getFlags() == Intent.FLAG_ACTIVITY_CLEAR_TOP)
             showMessage(getString(R.string.login_connectionfailed));
+    }
+
+    @Override
+    protected void onResume() {
+        mPresenter = ((XHomeRemote)getApplication()).getLoginPresenter(this);
     }
 
     @Override

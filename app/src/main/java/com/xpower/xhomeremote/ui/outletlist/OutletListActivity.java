@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.xpower.xhomeremote.R;
+import com.xpower.xhomeremote.XHomeRemote;
 import com.xpower.xhomeremote.data.model.Outlet;
 import com.xpower.xhomeremote.presenter.outletlist.IOutletListPresenter;
 import com.xpower.xhomeremote.presenter.outletlist.MockOutletListPresenter;
@@ -29,7 +30,7 @@ import java.util.List;
 public class OutletListActivity extends BaseActivity implements IOutletListView, OutletViewAdapter.ICardClickListner {
     private RecyclerView mRecyclerView;
     private OutletViewAdapter mOutletViewAdapter;
-    private IOutletListPresenter mOutletPresenter;
+    private IOutletListPresenter mPresenter;
     private SearchView mSearchView;
 
     /**
@@ -45,8 +46,8 @@ public class OutletListActivity extends BaseActivity implements IOutletListView,
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //mOutletPresenter = new OutletListPresenter(this);
-        mOutletPresenter = new MockOutletListPresenter(this);
+        //mPresenter = new OutletListPresenter(this);
+        mPresenter = new MockOutletListPresenter(this);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(R.string.toolbar_title);
@@ -61,7 +62,8 @@ public class OutletListActivity extends BaseActivity implements IOutletListView,
     @Override
     protected void onResume() {
         super.onResume();
-        mOutletPresenter.getOutlets();
+        mPresenter = ((XHomeRemote)getApplication()).getOutletListPresenter(this);
+        mPresenter.getOutlets();
     }
 
     @Override
@@ -153,7 +155,7 @@ public class OutletListActivity extends BaseActivity implements IOutletListView,
      */
     @Override
     public void onChangeListener(Outlet item, boolean isChecked) {
-        mOutletPresenter.changeState(item, isChecked);
+        mPresenter.changeState(item, isChecked);
     }
 
 

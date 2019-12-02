@@ -19,7 +19,7 @@ import okhttp3.WebSocket;
 
 public class WebSocketManager implements IWebSocketCallback, IWebSocketManager {
     private static WebSocketManager instance = null;
-    private IWebsocketConnectionSuccess mSuccesCallback;
+    private IWebsocketConnectionSuccess mSuccessCallback;
     private IWebsocketConnectionFailed mFailedCallback;
     private IWebsocketReceiveOutlet mReceiveSocketCallback;
 
@@ -31,6 +31,7 @@ public class WebSocketManager implements IWebSocketCallback, IWebSocketManager {
     private OkHttpClient mClient;
     private String mInternIp, mExternIp;
     public WebSocket mWebSocketConnection;
+    private boolean internalFailed;
 
     public WebSocketManager(){
         mWebSocketListener = new WebSocketListener(this);
@@ -44,8 +45,8 @@ public class WebSocketManager implements IWebSocketCallback, IWebSocketManager {
     }
 
     @Override
-    public void setSuccesCallback(IWebsocketConnectionSuccess mSuccesCallback) {
-        this.mSuccesCallback = mSuccesCallback;
+    public void setSuccessCallback(IWebsocketConnectionSuccess mSuccessCallback) {
+        this.mSuccessCallback = mSuccessCallback;
     }
 
     @Override
@@ -65,13 +66,14 @@ public class WebSocketManager implements IWebSocketCallback, IWebSocketManager {
 
     @Override
     public void startSocketConnection(){
+        internalFailed = false;
         if(mWebSocketConnection == null ) {
             if (mInternIp != null) {
                 mClient.newWebSocket(new Request.Builder().url(mInternIp).build(), mWebSocketListener);
             }
         }
         else{
-            mSuccesCallback.onWebsocketConnectionSuccess();
+            mSuccessCallback.onWebsocketConnectionSuccess();
         }
 
     }
@@ -92,7 +94,7 @@ public class WebSocketManager implements IWebSocketCallback, IWebSocketManager {
     }
 
     @Override
-    public void updateOutelet(Outlet outlet) {
+    public void updateOutlet(Outlet outlet) {
         OutletDTO data = new OutletDTO(outlet.id, outlet.agentId, outlet.name, outlet.type.name, outlet.state);
         Message m = new Message(null, MethodCode.CHANGE_SOCKET_STATE, data); //Todo: change methodCode
         if(mWebSocketConnection != null)
@@ -107,6 +109,11 @@ public class WebSocketManager implements IWebSocketCallback, IWebSocketManager {
 
     @Override
     public void onInternalConnectionFailed() {
+        if(internalFailed){
+            onExternalConnectionFailed();
+            return;
+        }
+        internalFailed = true;
         if(mInternIp != null){
             mClient.newWebSocket(new Request.Builder().url(mExternIp).build(),mWebSocketListener );
         }
@@ -120,7 +127,7 @@ public class WebSocketManager implements IWebSocketCallback, IWebSocketManager {
     @Override
     public void onConnectionSucces(WebSocket wSocket) {
         mWebSocketConnection = wSocket;
-        mSuccesCallback.onWebsocketConnectionSuccess();
+        mSuccessCallback.onWebsocketConnectionSuccess();
     }
 
 

@@ -48,7 +48,7 @@ public class OutletListPresenter implements IOutletListPresenter, IOutletListPre
     @Override
     public void changeState(Outlet outlet, boolean isChecked) {
         outlet.state = isChecked;
-        mWebSocketManager.updateOutelet(outlet);
+        mWebSocketManager.updateOutlet(outlet);
     }
 
 

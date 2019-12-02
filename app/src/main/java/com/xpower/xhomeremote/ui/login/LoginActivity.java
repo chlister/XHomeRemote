@@ -21,15 +21,18 @@ public class LoginActivity extends BaseActivity implements ILoginView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        mInternalIpEditView = findViewById(R.id.login_internal);
+        mExternalIpEditView = findViewById(R.id.login_external);
+
         findViewById(R.id.login_bnt).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mPresenter.login(mInternalIpEditView.getText().toString(), mExternalIpEditView.getText().toString());
             }
         });
-        mInternalIpEditView = findViewById(R.id.login_internal);
-        mExternalIpEditView = findViewById(R.id.login_external);
 
+
+        // Check if Activity is started by a ConnectionFailed
         if(getIntent().getFlags() == Intent.FLAG_ACTIVITY_CLEAR_TOP)
             showMessage(getString(R.string.login_connectionfailed));
     }
@@ -39,9 +42,13 @@ public class LoginActivity extends BaseActivity implements ILoginView {
         mPresenter = ((XHomeRemote)getApplication()).getLoginPresenter(this);
     }
 
+    //region callbacks
+
     @Override
     public void onConnectionSuccess(){
         Intent i = new Intent(this, OutletListActivity.class);
         startActivity(i);
     }
+
+    // endregion
 }

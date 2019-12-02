@@ -7,7 +7,7 @@ import com.xpower.xhomeremote.data.websocket.callback.IWebsocketReceiveOutlet;
 import com.xpower.xhomeremote.data.websocket.callback.IWebsocketRegister;
 
 public interface IWebSocketManager {
-    void setSuccesCallback(IWebsocketConnectionSuccess mSuccesCallback);
+    void setSuccessCallback(IWebsocketConnectionSuccess mSuccessCallback);
     void setFailedCallback(IWebsocketConnectionFailed mFailedCallback);
     void setReceiveOutletCallback(IWebsocketReceiveOutlet mReceiveSocketCallback);
     void setRegisterCallback(IWebsocketRegister mRegisterCallback);
@@ -15,6 +15,6 @@ public interface IWebSocketManager {
     void startSocketConnection();
     void getOutlets();
     void registerOutlet(Outlet outlet);
-    void updateOutelet(Outlet outlet);
+    void updateOutlet(Outlet outlet);
     void setIps(String internal, String external);
 }

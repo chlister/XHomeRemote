@@ -12,7 +12,7 @@ public class LoginPresenter implements ILoginPresenter, ILoginPresenterCallback 
         mView = view;
         mWebSocketManager = WebSocketManager.getInstance();
         mWebSocketManager.setFailedCallback(this);
-        mWebSocketManager.setSuccesCallback(this);
+        mWebSocketManager.setSuccessCallback(this);
     }
 
     @Override

@@ -86,7 +86,7 @@ public final class WebSocketListener extends okhttp3.WebSocketListener {
     @Override
     public void onClosing(WebSocket webSocket, int code, String reason) {
         super.onClosing(webSocket, code, reason);
-        //TODO: Callback
+        callback.onExternalConnectionFailed();
     }
 
     /**
@@ -98,6 +98,6 @@ public final class WebSocketListener extends okhttp3.WebSocketListener {
     @Override
     public void onFailure(WebSocket webSocket, Throwable t, Response response) {
         super.onFailure(webSocket, t, response);
-        //TODO: Callback
+        callback.onInternalConnectionFailed();
     }
 }

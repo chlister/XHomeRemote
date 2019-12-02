@@ -59,6 +59,12 @@ public class OutletListActivity extends BaseActivity implements IOutletListView,
         mRecyclerView.setAdapter(mOutletViewAdapter);
     }
 
+    /**
+     * @author  Martin J. J.
+     * @version 1.0
+     * @since   11/20/2019
+     * @status  Under Development
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -66,6 +72,12 @@ public class OutletListActivity extends BaseActivity implements IOutletListView,
         mPresenter.getOutlets();
     }
 
+    /**
+     * @author  Martin J. J.
+     * @version 1.0
+     * @since   11/20/2019
+     * @status  Under Development
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.outletlist_menu, menu);
@@ -107,7 +119,9 @@ public class OutletListActivity extends BaseActivity implements IOutletListView,
     public void onOutletDataReceived(List<Outlet> outlets) {
         runOnUiThread(() -> {
             mOutletViewAdapter.setData(outlets);
-            mOutletViewAdapter.notifyDataSetChanged();
+            if(mSearchView != null)
+                mOutletViewAdapter.getFilter().filter(mSearchView.getQuery());
+            //mOutletViewAdapter.notifyDataSetChanged();
         });
     }
 

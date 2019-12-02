@@ -86,18 +86,33 @@ public class OutletRegisterActivity extends BaseActivity implements IOutletRegis
         });
     }
 
+    /**
+     * @author  Martin J. J.
+     * @since   11/20/2019
+     * @status  Under Development
+     */
     @Override
     protected void onResume() {
         super.onResume();
         mPresenter = ((XHomeRemote)getApplication()).getOutletRegisterPresenter(this);
     }
 
+    /**
+     * @author  Martin J. J.
+     * @since   11/20/2019
+     * @status  Under Development
+     */
     @Override
     public void onRegisterSuccess(){
         runOnUiThread(() -> showMessage("Outlet Updated"));
         finish();
     }
 
+    /**
+     * @author  Martin J. J.
+     * @since   11/20/2019
+     * @status  Under Development
+     */
     @Override
     public void onRegisterFailed(){
         runOnUiThread(() -> showMessage("Register failed"));

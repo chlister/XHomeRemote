@@ -39,6 +39,7 @@ public class LoginActivity extends BaseActivity implements ILoginView {
 
     @Override
     protected void onResume() {
+        super.onResume();
         mPresenter = ((XHomeRemote)getApplication()).getLoginPresenter(this);
     }
 

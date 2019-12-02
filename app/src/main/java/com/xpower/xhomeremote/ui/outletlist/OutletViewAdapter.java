@@ -46,6 +46,7 @@ public class OutletViewAdapter extends RecyclerView.Adapter<OutletViewAdapter.Vi
         this.mContext = context;
         this.mInflater = LayoutInflater.from(context);
         this.mData = new ArrayList<>();
+        this.mFilteredData = new ArrayList<>();
     }
 
     /**
@@ -77,7 +78,7 @@ public class OutletViewAdapter extends RecyclerView.Adapter<OutletViewAdapter.Vi
      */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        if(mFilteredData.get(position).name.isEmpty()){
+        if(mFilteredData.get(position).name.isEmpty() ||mFilteredData.get(position).name == ("outlet_" + mFilteredData.get(position).id)){
             holder.mNameTextView.setVisibility(View.GONE);
             holder.mAgentIdLayout.setVisibility(View.VISIBLE);
             holder.mOutletIdLayout.setVisibility(View.VISIBLE);
@@ -90,7 +91,7 @@ public class OutletViewAdapter extends RecyclerView.Adapter<OutletViewAdapter.Vi
             holder.mOutletIdLayout.setVisibility(View.GONE);
             holder.mNameTextView.setText(mFilteredData.get(position).name);
         }
-        if(mFilteredData.get(position).type == HomeApplianceType.getNonType()){
+        if(mFilteredData.get(position).type.name == HomeApplianceType.getNonType().name){
             holder.mTypeTextView.setText(mContext.getString(R.string.not_registered));
             holder.mTypeHeadTextView.setVisibility(View.GONE);
         }
@@ -118,12 +119,12 @@ public class OutletViewAdapter extends RecyclerView.Adapter<OutletViewAdapter.Vi
 
             @Override
             public void onItemLongClick(Outlet item) {
-
+                int i = 0;
             }
 
             @Override
             public void onChangeListener(Outlet item, boolean isChecked) {
-
+                int i = 0;
             }
         };
     }
@@ -259,7 +260,8 @@ public class OutletViewAdapter extends RecyclerView.Adapter<OutletViewAdapter.Vi
          */
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            mOnclicklistner.onChangeListener(mFilteredData.get(getAdapterPosition()), isChecked);
+            if(((Outlet)mFilteredData.get(getAdapterPosition())).state != isChecked)
+                mOnclicklistner.onChangeListener(mFilteredData.get(getAdapterPosition()), isChecked);
         }
     }
 }

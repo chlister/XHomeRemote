@@ -9,9 +9,9 @@ public class OutletRegisterPresenter implements IOutletRegisterPresneterCallback
     private IOutletRegisterView mView;
     private IWebSocketManager mWebSocketManager;
 
-    public OutletRegisterPresenter(IOutletRegisterView mView) {
+    public OutletRegisterPresenter(IOutletRegisterView mView, IWebSocketManager webSocketManager) {
         this.mView = mView;
-        mWebSocketManager = WebSocketManager.getInstance();
+        mWebSocketManager = webSocketManager;
         mWebSocketManager.setRegisterCallback(this);
     }
 

@@ -9,7 +9,6 @@ package com.xpower.xhomeremote.presenter.outletlist;
 
 import com.xpower.xhomeremote.data.model.Outlet;
 import com.xpower.xhomeremote.data.websocket.IWebSocketManager;
-import com.xpower.xhomeremote.data.websocket.WebSocketManager;
 import com.xpower.xhomeremote.ui.outletlist.IOutletListView;
 
 import java.util.List;
@@ -23,9 +22,9 @@ public class OutletListPresenter implements IOutletListPresenter, IOutletListPre
      * @since   11/20/2019
      * @status  Ready for review
      */
-    public OutletListPresenter(IOutletListView view){
+    public OutletListPresenter(IOutletListView view, IWebSocketManager webSocketManager){
         mView = view;
-        mWebSocketManager = WebSocketManager.getInstance();
+        mWebSocketManager = webSocketManager;
         mWebSocketManager.setFailedCallback(this);
         mWebSocketManager.setReceiveOutletCallback(this);
     }

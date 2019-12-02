@@ -48,7 +48,6 @@ public class OutletRegisterActivity extends BaseActivity implements IOutletRegis
         setContentView(R.layout.activity_outlet_register);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        mPresenter = new OutletRegisterPresenter(this);
         getSupportActionBar().setTitle(this.getString(R.string.registerOutletTitle));
 
         mTypeTextView = findViewById(R.id.register_Type);

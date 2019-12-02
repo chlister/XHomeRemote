@@ -8,9 +8,9 @@ public class LoginPresenter implements ILoginPresenter, ILoginPresenterCallback 
     private IWebSocketManager mWebSocketManager;
     private ILoginView mView;
 
-    public LoginPresenter(ILoginView view){
+    public LoginPresenter(ILoginView view, IWebSocketManager webSocketManager){
         mView = view;
-        mWebSocketManager = WebSocketManager.getInstance();
+        mWebSocketManager = webSocketManager;
         mWebSocketManager.setFailedCallback(this);
         mWebSocketManager.setSuccessCallback(this);
     }

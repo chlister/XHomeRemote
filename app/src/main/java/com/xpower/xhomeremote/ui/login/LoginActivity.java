@@ -1,3 +1,9 @@
+/**
+ * Activity for view the presents a login screen
+ * @author  Martin J. J.
+ * @version 1.0
+ * @since   11/20/2019
+ */
 package com.xpower.xhomeremote.ui.login;
 
 import android.content.Intent;
@@ -16,6 +22,11 @@ public class LoginActivity extends BaseActivity implements ILoginView {
     private ILoginPresenter mPresenter;
     private EditText mInternalIpEditView, mExternalIpEditView;
 
+    /**
+     * @author  Martin J. J.
+     * @since   11/26/2019
+     * @status  Done
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,19 +48,28 @@ public class LoginActivity extends BaseActivity implements ILoginView {
             showMessage(getString(R.string.login_connectionfailed));
     }
 
+    /**
+     * We inject the callback onResume to insure that the active Presenter/Activity gets the callback
+     * @author  Martin J. J.
+     * @since   11/26/2019
+     * @status  Done
+     */
     @Override
     protected void onResume() {
         super.onResume();
         mPresenter = ((XHomeRemote)getApplication()).getLoginPresenter(this);
     }
 
-    //region callbacks
-
+    /**
+     * start the OutletListActivity if connection was Successful
+     * @author  Martin J. J.
+     * @since   11/26/2019
+     * @status  Done
+     */
     @Override
     public void onConnectionSuccess(){
         Intent i = new Intent(this, OutletListActivity.class);
         startActivity(i);
     }
 
-    // endregion
 }

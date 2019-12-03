@@ -1,8 +1,9 @@
 /**
- * TODO: Add class description
+ * This i a Recyclerview.Adapter that creates the cardviews without the recycleview and binds the
+ * Outlets to those cardviews.
  *
  * @author Martin J. J.
- * @version 1.0
+ * @version 2.0
  * @since 11/20/2019
  */
 package com.xpower.xhomeremote.ui.outletlist;
@@ -40,7 +41,7 @@ public class OutletViewAdapter extends RecyclerView.Adapter<OutletViewAdapter.Vi
     /**
      * @author  Martin J. J.
      * @since   11/20/2019
-     * @status  Under Development
+     * @status  Done
      */
     public OutletViewAdapter(Context context) {
         this.mContext = context;
@@ -52,7 +53,7 @@ public class OutletViewAdapter extends RecyclerView.Adapter<OutletViewAdapter.Vi
     /**
      * @author  Martin J. J.
      * @since   11/20/2019
-     * @status  Under Development
+     * @status  Done
      */
     public void setData(List<Outlet> data){
         this.mData = data;
@@ -62,7 +63,7 @@ public class OutletViewAdapter extends RecyclerView.Adapter<OutletViewAdapter.Vi
     /**
      * @author  Martin J. J.
      * @since   11/20/2019
-     * @status  Under Development
+     * @status  Done
      */
     @NonNull
     @Override
@@ -72,9 +73,10 @@ public class OutletViewAdapter extends RecyclerView.Adapter<OutletViewAdapter.Vi
     }
 
     /**
+     * This method binds the data to the view.
      * @author  Martin J. J.
      * @since   11/20/2019
-     * @status  Under Development
+     * @status  Done
      */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
@@ -109,7 +111,13 @@ public class OutletViewAdapter extends RecyclerView.Adapter<OutletViewAdapter.Vi
             holder.mImageView.setImageResource(mFilteredData.get(position).type.offRessource);
     }
 
-
+    /**
+     * This method is use for when the data is being binded to the view, if this is not use during
+     * binding to state update will trigger the onChangeLister and keep request new data
+     * @author  Martin J. J.
+     * @since   11/28/2019
+     * @status  Done
+     */
     public static ICardClickListner getEmptyICardClickListner(){
         return new ICardClickListner() {
             @Override
@@ -133,7 +141,7 @@ public class OutletViewAdapter extends RecyclerView.Adapter<OutletViewAdapter.Vi
     /**
      * @author  Martin J. J.
      * @since   11/20/2019
-     * @status  Under Development
+     * @status  Done
      */
     @Override
     public int getItemCount() {
@@ -143,12 +151,17 @@ public class OutletViewAdapter extends RecyclerView.Adapter<OutletViewAdapter.Vi
     /**
      * @author  Martin J. J.
      * @since   11/20/2019
-     * @status  Under Development
+     * @status  Done
      */
     public void setOnItemClickListener(ICardClickListner onclicklistner) {
         this.mOnclicklistner = onclicklistner;
     }
 
+    /**
+     * @author  Martin J. J.
+     * @since   12/1/2019
+     * @status  Done
+     */
     @Override
     public Filter getFilter() {
         return new Filter() {
@@ -185,9 +198,10 @@ public class OutletViewAdapter extends RecyclerView.Adapter<OutletViewAdapter.Vi
     }
 
     /**
+     * Listener interface for the ViewCards
      * @author  Martin J. J.
-     * @since   11/20/2019
-     * @status  Under Development
+     * @since   11/28/2019
+     * @status  Done
      */
     public interface ICardClickListner {
         void onItemClick(Outlet item);
@@ -199,7 +213,7 @@ public class OutletViewAdapter extends RecyclerView.Adapter<OutletViewAdapter.Vi
     /**
      * @author  Martin J. J.
      * @since   11/20/2019
-     * @status  Under Development
+     * @status  Done
      */
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener, CompoundButton.OnCheckedChangeListener {
         ImageView mImageView;
@@ -209,9 +223,10 @@ public class OutletViewAdapter extends RecyclerView.Adapter<OutletViewAdapter.Vi
 
 
         /**
+         * Contructor for the ViewHolder, that binds the layout to the ViewHolder
          * @author  Martin J. J.
          * @since   11/20/2019
-         * @status  Under Development
+         * @status  Done
          */
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -234,8 +249,8 @@ public class OutletViewAdapter extends RecyclerView.Adapter<OutletViewAdapter.Vi
 
         /**
          * @author  Martin J. J.
-         * @since   11/20/2019
-         * @status  Under Development
+         * @since   11/28/2019
+         * @status  Done
          */
         @Override
         public void onClick(View v) {
@@ -244,8 +259,8 @@ public class OutletViewAdapter extends RecyclerView.Adapter<OutletViewAdapter.Vi
 
         /**
          * @author  Martin J. J.
-         * @since   11/20/2019
-         * @status  Under Development
+         * @since   11/28/2019
+         * @status  Done
          */
         @Override
         public boolean onLongClick(View v) {
@@ -255,8 +270,8 @@ public class OutletViewAdapter extends RecyclerView.Adapter<OutletViewAdapter.Vi
 
         /**
          * @author  Martin J. J.
-         * @since   11/20/2019
-         * @status  Under Development
+         * @since   11/28/2019
+         * @status  Done
          */
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

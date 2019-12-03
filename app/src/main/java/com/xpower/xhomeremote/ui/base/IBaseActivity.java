@@ -1,5 +1,5 @@
 /**
- * TODO: Add class description
+ * This is the base activity callback interface.
  *
  * @author Martin J. J.
  * @version 1.0

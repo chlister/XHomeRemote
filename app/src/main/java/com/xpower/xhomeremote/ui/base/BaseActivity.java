@@ -2,7 +2,7 @@
  * BaseActivity is an expansion to the native AppCompatActivity. This allow us to reuse method that are assume to be used by multiple activities.
  *
  * @author Martin J. J.
- * @version 1.0
+ * @version 2.0
  * @since 11/20/2019
  */
 package com.xpower.xhomeremote.ui.base;
@@ -24,9 +24,8 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
 
     /**
      * @author  Martin J. J.
-     * @version 1.0
      * @since   11/20/2019
-     * @status  Under Development
+     * @status  Done
      */
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,9 +36,8 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     /**
      * Shows the ProgressDialog for the user
      * @author  Martin J. J.
-     * @version 1.0
      * @since   11/20/2019
-     * @status  Under Development
+     * @status  Done
      */
     @Override
     public void showLoading() {
@@ -53,9 +51,8 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     /**
      * Hides the ProgressDialog for the user
      * @author  Martin J. J.
-     * @version 1.0
      * @since   11/20/2019
-     * @status  Under Development
+     * @status  Done
      */
     @Override
     public void hideLoading() {
@@ -67,9 +64,8 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     /**
      * Shows a toast with the param message
      * @author  Martin J. J.
-     * @version 1.0
      * @since   11/20/2019
-     * @status  Under Development
+     * @status  Done
      */
     @Override
     public void showMessage(String message) {
@@ -81,15 +77,20 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     /**
      * Shows a toast with the string from param ressource id.
      * @author  Martin J. J.
-     * @version 1.0
      * @since   11/20/2019
-     * @status  Under Development
+     * @status  Done
      */
     @Override
     public void showMessage(@StringRes int resId) {
         showMessage(getString(resId));
     }
 
+    /**
+     * Returns to the user to the login activity if connections failed
+     * @author  Martin J. J.
+     * @since   11/28/2019
+     * @status  Done
+     */
     @Override
     public void onConnectionFailed(String msg) {
         Intent i=new Intent(this, LoginActivity.class);

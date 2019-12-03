@@ -22,7 +22,6 @@ import com.xpower.xhomeremote.XHomeRemote;
 import com.xpower.xhomeremote.data.model.HomeApplianceType;
 import com.xpower.xhomeremote.data.model.Outlet;
 import com.xpower.xhomeremote.presenter.outletregister.IOutletRegisterPresenter;
-import com.xpower.xhomeremote.presenter.outletregister.OutletRegisterPresenter;
 import com.xpower.xhomeremote.ui.base.BaseActivity;
 
 public class OutletRegisterActivity extends BaseActivity implements IOutletRegisterView {
@@ -38,9 +37,8 @@ public class OutletRegisterActivity extends BaseActivity implements IOutletRegis
 
     /**
      * @author  Martin J. J.
-     * @version 1.0
      * @since   11/20/2019
-     * @status  Under Development
+     * @status  Done
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,9 +84,10 @@ public class OutletRegisterActivity extends BaseActivity implements IOutletRegis
     }
 
     /**
+     *  * We inject the callback onResume to insure that the active Presenter/Activity gets the callback
      * @author  Martin J. J.
      * @since   11/20/2019
-     * @status  Under Development
+     * @status  Done
      */
     @Override
     protected void onResume() {
@@ -97,9 +96,10 @@ public class OutletRegisterActivity extends BaseActivity implements IOutletRegis
     }
 
     /**
+     * * Returns to the previous activity if register where successful
      * @author  Martin J. J.
      * @since   11/20/2019
-     * @status  Under Development
+     * @status  Done
      */
     @Override
     public void onRegisterSuccess(){
@@ -108,9 +108,10 @@ public class OutletRegisterActivity extends BaseActivity implements IOutletRegis
     }
 
     /**
+     * Shows toast if register failed
      * @author  Martin J. J.
      * @since   11/20/2019
-     * @status  Under Development
+     * @status  Done
      */
     @Override
     public void onRegisterFailed(){

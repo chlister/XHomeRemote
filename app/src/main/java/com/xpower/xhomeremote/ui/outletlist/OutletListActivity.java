@@ -1,7 +1,7 @@
 /**
- * Activity for view the presents a list of outlets
+ * Activity for view that presents a list of outlets
  * @author  Martin J. J.
- * @version 1.0
+ * @version 2.0
  * @since   11/20/2019
  */
 package com.xpower.xhomeremote.ui.outletlist;
@@ -21,7 +21,6 @@ import com.xpower.xhomeremote.R;
 import com.xpower.xhomeremote.XHomeRemote;
 import com.xpower.xhomeremote.data.model.Outlet;
 import com.xpower.xhomeremote.presenter.outletlist.IOutletListPresenter;
-import com.xpower.xhomeremote.presenter.outletlist.MockOutletListPresenter;
 import com.xpower.xhomeremote.ui.base.BaseActivity;
 import com.xpower.xhomeremote.ui.outletregister.OutletRegisterActivity;
 
@@ -35,9 +34,8 @@ public class OutletListActivity extends BaseActivity implements IOutletListView,
 
     /**
      * @author  Martin J. J.
-     * @version 1.0
      * @since   11/20/2019
-     * @status  Under Development
+     * @status  Done
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +43,6 @@ public class OutletListActivity extends BaseActivity implements IOutletListView,
         setContentView(R.layout.activity_outlet_list);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        //mPresenter = new OutletListPresenter(this);
-        mPresenter = new MockOutletListPresenter(this);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(R.string.toolbar_title);
@@ -60,10 +55,10 @@ public class OutletListActivity extends BaseActivity implements IOutletListView,
     }
 
     /**
+     * We inject the callback onResume to insure that the active Presenter/Activity gets the callback
      * @author  Martin J. J.
-     * @version 1.0
      * @since   11/20/2019
-     * @status  Under Development
+     * @status  Done
      */
     @Override
     protected void onResume() {
@@ -73,10 +68,10 @@ public class OutletListActivity extends BaseActivity implements IOutletListView,
     }
 
     /**
+     * This method specify the options for the activites menu (topbar)
      * @author  Martin J. J.
-     * @version 1.0
-     * @since   11/20/2019
-     * @status  Under Development
+     * @since   11/28/2019
+     * @status  Done
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -110,10 +105,10 @@ public class OutletListActivity extends BaseActivity implements IOutletListView,
     }
 
     /**
+     * Filter received outlets according to the Search query
      * @author  Martin J. J.
-     * @version 1.0
      * @since   11/20/2019
-     * @status  Under Development
+     * @status  Done
      */
     @Override
     public void onOutletDataReceived(List<Outlet> outlets) {
@@ -121,27 +116,15 @@ public class OutletListActivity extends BaseActivity implements IOutletListView,
             mOutletViewAdapter.setData(outlets);
             if(mSearchView != null)
                 mOutletViewAdapter.getFilter().filter(mSearchView.getQuery());
-            //mOutletViewAdapter.notifyDataSetChanged();
         });
     }
 
-    /**
-     * @author  Martin J. J.
-     * @version 1.0
-     * @since   11/20/2019
-     * @status  Under Development
-     */
-    @Override
-    public void onConnectionFailed(String msg) {
-        runOnUiThread(() -> showMessage(msg));
-    }
-
 
     /**
+     * Listener for when a card has been pressed
      * @author  Martin J. J.
-     * @version 1.0
      * @since   11/20/2019
-     * @status  Defined
+     * @status  Done
      */
     @Override
     public void onItemClick(Outlet item) {
@@ -149,10 +132,10 @@ public class OutletListActivity extends BaseActivity implements IOutletListView,
     }
 
     /**
+     * Listener for when a card has been long pressed
      * @author  Martin J. J.
-     * @version 1.0
      * @since   11/20/2019
-     * @status  Under Development
+     * @status  Done
      */
     @Override
     public void onItemLongClick(Outlet item) {
@@ -162,10 +145,10 @@ public class OutletListActivity extends BaseActivity implements IOutletListView,
     }
 
     /**
+     * Listener for when the switch on a card change state
      * @author  Martin J. J.
-     * @version 1.0
      * @since   11/20/2019
-     * @status  Under Development
+     * @status  Done
      */
     @Override
     public void onChangeListener(Outlet item, boolean isChecked) {

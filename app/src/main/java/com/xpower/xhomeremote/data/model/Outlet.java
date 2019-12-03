@@ -1,5 +1,5 @@
 /**
- * This Class is a data transfer object the represent en unique outlets
+ * This Class represent the Outlet.
  *
  * @author Martin J. J.
  * @version 1.0
@@ -17,6 +17,11 @@ public class Outlet implements Serializable {
     public HomeApplianceType type;
     public boolean state;
 
+    /**
+     * @author  Martin J. J.
+     * @since   11/20/2019
+     * @status  Done
+     */
     public Outlet(int id, int agentId, String name, HomeApplianceType type, boolean state) {
         this.id = id;
         this.agentId = agentId;
@@ -25,6 +30,11 @@ public class Outlet implements Serializable {
         this.state = state;
     }
 
+    /**
+     * @author  Martin J. J.
+     * @since   11/20/2019
+     * @status  Done
+     */
     @Override
     public String toString() {
         return "Outlet{" +

@@ -1,9 +1,8 @@
 /**
- * TODO: Add class description
  *
  * @author Martin J. J.
- * @version 1.0
- * @since 11/20/2019
+ * @version 2.0
+ * @since 11/26/2019
  */
 package com.xpower.xhomeremote.presenter.outletlist;
 
@@ -20,7 +19,7 @@ public class OutletListPresenter implements IOutletListPresenter, IOutletListPre
     /**
      * @author  Martin J. J.
      * @since   11/20/2019
-     * @status  Ready for review
+     * @status  Done
      */
     public OutletListPresenter(IOutletListView view, IWebSocketManager webSocketManager){
         mView = view;
@@ -32,7 +31,7 @@ public class OutletListPresenter implements IOutletListPresenter, IOutletListPre
     /**
      * @author  Martin J. J.
      * @since   11/20/2019
-     * @status  Defined
+     * @status  Done
      */
     @Override
     public void getOutlets() {
@@ -41,8 +40,8 @@ public class OutletListPresenter implements IOutletListPresenter, IOutletListPre
 
     /**
      * @author  Martin J. J.
-     * @since   11/20/2019
-     * @status  Defined
+     * @since   11/24/2019
+     * @status  Done
      */
     @Override
     public void changeState(Outlet outlet, boolean isChecked) {
@@ -54,7 +53,7 @@ public class OutletListPresenter implements IOutletListPresenter, IOutletListPre
     /**
      * @author  Martin J. J.
      * @since   11/20/2019
-     * @status  Ready for Review
+     * @status  Done
      */
     @Override
     public void onReceiveOutlet(List<Outlet> outlets) {
@@ -64,7 +63,7 @@ public class OutletListPresenter implements IOutletListPresenter, IOutletListPre
     /**
      * @author  Martin J. J.
      * @since   11/20/2019
-     * @status  Defined
+     * @status  Done
      */
     @Override
     public void onWebsocketConnectionFailed(String msg) {

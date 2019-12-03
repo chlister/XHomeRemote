@@ -1,8 +1,6 @@
 /**
- * TODO: Add class description
- *
  * @author Martin J. J.
- * @version 1.0
+ * @version 2.0
  * @since 11/20/2019
  */
 package com.xpower.xhomeremote.data.websocket;
@@ -26,9 +24,8 @@ public final class WebSocketListener extends okhttp3.WebSocketListener {
 
     /**
      * @author  Martin J. J.
-     * @version 1.0
      * @since   11/20/2019
-     * @status  Defined
+     * @status  Done
      */
     public WebSocketListener(IWebSocketCallback callback){
         this.callback = callback;
@@ -36,9 +33,8 @@ public final class WebSocketListener extends okhttp3.WebSocketListener {
 
     /**
      * @author  Martin J. J.
-     * @version 1.0
      * @since   11/20/2019
-     * @status  Defined
+     * @status  Done
      */
     @Override
     public void onOpen(WebSocket webSocket, Response response) {
@@ -49,9 +45,8 @@ public final class WebSocketListener extends okhttp3.WebSocketListener {
 
     /**
      * @author  Martin J. J.
-     * @version 1.0
      * @since   11/20/2019
-     * @status  Defined
+     * @status  Done
      */
     @Override
     public void onMessage(WebSocket webSocket, String text) {
@@ -79,9 +74,8 @@ public final class WebSocketListener extends okhttp3.WebSocketListener {
 
     /**
      * @author  Martin J. J.
-     * @version 1.0
      * @since   11/20/2019
-     * @status  Defined
+     * @status  Done
      */
     @Override
     public void onClosing(WebSocket webSocket, int code, String reason) {
@@ -91,9 +85,8 @@ public final class WebSocketListener extends okhttp3.WebSocketListener {
 
     /**
      * @author  Martin J. J.
-     * @version 1.0
      * @since   11/20/2019
-     * @status  Defined
+     * @status  Done
      */
     @Override
     public void onFailure(WebSocket webSocket, Throwable t, Response response) {

@@ -1,5 +1,5 @@
 /**
- * TODO: Add class description
+ * Mockup OutletListPresenter
  *
  * @author Martin J. J.
  * @version 1.0
@@ -18,7 +18,6 @@ public class MockOutletListPresenter implements IOutletListPresenter {
 
     /**
      * @author  Martin J. J.
-     * @version 1.0
      * @since   11/20/2019
      * @status  Under Development
      */
@@ -28,7 +27,6 @@ public class MockOutletListPresenter implements IOutletListPresenter {
 
     /**
      * @author  Martin J. J.
-     * @version 1.0
      * @since   11/20/2019
      * @status  Under Development
      */
@@ -45,7 +43,6 @@ public class MockOutletListPresenter implements IOutletListPresenter {
 
     /**
      * @author  Martin J. J.
-     * @version 1.0
      * @since   11/20/2019
      * @status  Under Development
      */

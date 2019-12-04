@@ -150,7 +150,7 @@ public class WebSocketManager implements IWebSocketCallback, IWebSocketManager {
     @Override
     public void updateOutlet(Outlet outlet) {
         OutletDTO data = new OutletDTO(outlet.id, outlet.agentId, outlet.name, outlet.type.name, outlet.state);
-        Message m = new Message(null, MethodCode.CHANGE_SOCKET_STATE, data); //Todo: change methodCode
+        Message m = new Message(null, MethodCode.CHANGE_SOCKET_STATE, data);
         if(mWebSocketConnection != null)
             mWebSocketConnection.send(m.encode());
     }
@@ -210,9 +210,9 @@ public class WebSocketManager implements IWebSocketCallback, IWebSocketManager {
      * @status  Done
      */
     @Override
-    public void onReceiveSockets(List<OutletDTO> sockets) {
+    public void onReceiveOutlets(List<OutletDTO> outletsDTO) {
         List<Outlet> list = new ArrayList<>();
-        for (OutletDTO s: sockets) {
+        for (OutletDTO s: outletsDTO) {
             list.add(new Outlet(s.getId(), s.getAgentId(), s.getName(), HomeApplianceType.getType(s.getApplianceType()), s.getState()));
         }
         mReceiveSocketCallback.onReceiveOutlet(list);

@@ -10,7 +10,7 @@ import java.util.List;
 import okhttp3.WebSocket;
 
 public interface IWebSocketCallback  {
-    void onReceiveSockets(List<OutletDTO> sockets);
+    void onReceiveOutlets(List<OutletDTO> sockets);
 
     void onRegisterSuccess();
 

@@ -86,7 +86,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseAct
     }
 
     /**
-     * Returns to the user to the login activity if connections failed
+     * Returns the user to the login activity if connections failed
      * @author  Martin J. J.
      * @since   11/28/2019
      * @status  Done

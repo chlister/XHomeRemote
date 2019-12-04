@@ -57,7 +57,7 @@ public final class WebSocketListener extends okhttp3.WebSocketListener {
         {
             case GET_SOCKETS:
                 if(m.getRespondCodes() == RespondCodes.OK)
-                    callback.onReceiveSockets(OutletDTO.deserialize((ArrayList<LinkedTreeMap>) m.getObj()));
+                    callback.onReceiveOutlets(OutletDTO.deserialize((ArrayList<LinkedTreeMap>) m.getObj()));
                 break;
 
             case REGISTER:

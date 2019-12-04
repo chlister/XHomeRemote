@@ -158,6 +158,7 @@ public class OutletViewAdapter extends RecyclerView.Adapter<OutletViewAdapter.Vi
     }
 
     /**
+     * Returns a filter that constrains data with the filter pattern.
      * @author  Martin J. J.
      * @since   12/1/2019
      * @status  Done
@@ -176,7 +177,11 @@ public class OutletViewAdapter extends RecyclerView.Adapter<OutletViewAdapter.Vi
 
                         // name match condition. this might differ depending on your requirement
                         // here we are looking for name or phone number match
-                        if (outlet.name.toLowerCase().contains(charString.toLowerCase()) || outlet.type.name.toLowerCase().contains(charString.toLowerCase()) || Integer.toString(outlet.agentId).contains(charSequence) || Integer.toString(outlet.id).contains(charSequence) ) {
+                        if (outlet.name.toLowerCase().contains(charString.toLowerCase()) ||
+                                outlet.type.name.toLowerCase().contains(charString.toLowerCase()) ||
+                                Integer.toString(outlet.agentId).contains(charSequence) ||
+                                Integer.toString(outlet.id).contains(charSequence) )
+                        {
                             filteredList.add(outlet);
                         }
                     }

@@ -61,9 +61,9 @@ public class HomeApplianceType implements Serializable {
      * @status  Done
      */
     public static HomeApplianceType getType(String name){
-        for (HomeApplianceType h : getHomeAppliancesTypes()){
-            if(h.name.equals(name))
-                return h;
+        for (HomeApplianceType homeApplianceType : getHomeAppliancesTypes()){
+            if(homeApplianceType.name.equals(name))
+                return homeApplianceType;
         }
         return getNonType();
     }
@@ -76,19 +76,9 @@ public class HomeApplianceType implements Serializable {
      */
     public static List<String> getHomeApplianceNames(){
         List<String> names = new ArrayList<>();
-        for (HomeApplianceType h : getHomeAppliancesTypes()){
-            names.add(h.name);
+        for (HomeApplianceType homeApplianceType : getHomeAppliancesTypes()){
+            names.add(homeApplianceType.name);
         }
         return names;
     }
-
-
 }
-/*
-
-  NON,
-    OTHER,
-    COFFEE_MACHINE,
-    LAPTOP,
-    LIGHT
- */

@@ -124,7 +124,7 @@ public class WebSocketManager implements IWebSocketCallback, IWebSocketManager {
      */
     @Override
     public void getOutlets() {
-        Message m = new Message(null, MethodCode.GET_SOCKETS, null);
+        Message m = new Message(null, MethodCode.GET_OUTLETS, null);
         if(mWebSocketConnection != null)
             mWebSocketConnection.send(m.encode());
     }
@@ -150,7 +150,7 @@ public class WebSocketManager implements IWebSocketCallback, IWebSocketManager {
     @Override
     public void updateOutlet(Outlet outlet) {
         OutletDTO data = new OutletDTO(outlet.id, outlet.agentId, outlet.name, outlet.type.name, outlet.state);
-        Message m = new Message(null, MethodCode.CHANGE_SOCKET_STATE, data);
+        Message m = new Message(null, MethodCode.CHANGE_OUTLET_STATE, data);
         if(mWebSocketConnection != null)
             mWebSocketConnection.send(m.encode());
     }

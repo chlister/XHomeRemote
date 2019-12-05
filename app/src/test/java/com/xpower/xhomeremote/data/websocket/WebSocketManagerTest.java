@@ -1,5 +1,6 @@
 package com.xpower.xhomeremote.data.websocket;
 
+import com.google.gson.internal.LinkedTreeMap;
 import com.xpower.message.model.OutletDTO;
 import com.xpower.xhomeremote.data.model.HomeApplianceType;
 import com.xpower.xhomeremote.data.model.Outlet;
@@ -32,7 +33,7 @@ public class WebSocketManagerTest {
 
         manager.setReceiveOutletCallback(new IWebsocketReceiveOutlet() {
             @Override
-            public void onReceiveOutlet(List<Outlet> outlets) {
+            public void onReceiveOutlet(List<Outlet> outlets) { // This is not the same method as the method being tested.
                 // Test the both items has been converted
                 Assert.assertEquals(2, outlets.size());
 
@@ -70,5 +71,14 @@ public class WebSocketManagerTest {
         list.add(testObject);
         list.add(testObject2);
         manager.onReceiveOutlets(list);
+
+        LinkedTreeMap tree = new LinkedTreeMap();
+        tree.put("id", OBJECT1_ID);
+        tree.put("agentId", OBJECT1_AGENTID);
+        tree.put("state", OBJECT1_STATE);
+        tree.put("name", OBJECT1_NAME);
+        tree.put("applianceType", OBJECT1_TYPENAME);
+
+
     }
 }

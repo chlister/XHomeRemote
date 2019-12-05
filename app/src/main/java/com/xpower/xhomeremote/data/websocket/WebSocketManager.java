@@ -106,10 +106,9 @@ public class WebSocketManager implements IWebSocketCallback, IWebSocketManager {
     @Override
     public void startSocketConnection(){
         internalFailed = false;
-        if(mWebSocketConnection == null ) {
-            if (mInternIp != null) {
-                mClient.newWebSocket(new Request.Builder().url(mInternIp).build(), mWebSocketListener);
-            }
+
+        if (mInternIp != null) {
+            mClient.newWebSocket(new Request.Builder().url(mInternIp).build(), mWebSocketListener);
         }
         else{
             mSuccessCallback.onWebsocketConnectionSuccess();

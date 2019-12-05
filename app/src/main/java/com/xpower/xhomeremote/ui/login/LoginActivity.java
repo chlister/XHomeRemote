@@ -42,7 +42,6 @@ public class LoginActivity extends BaseActivity implements ILoginView {
             }
         });
 
-
         // Check if Activity is started by a ConnectionFailed
         if(getIntent().getFlags() == Intent.FLAG_ACTIVITY_CLEAR_TOP)
             showMessage(getString(R.string.login_connectionfailed));

@@ -48,6 +48,7 @@ public class OutletListActivity extends BaseActivity implements IOutletListView,
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(R.string.toolbar_title);
 
+
         mRecyclerView = findViewById(R.id.OutletListActivity_recyclerView);
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         mOutletViewAdapter = new OutletViewAdapter(this);
@@ -66,6 +67,17 @@ public class OutletListActivity extends BaseActivity implements IOutletListView,
         super.onResume();
         mPresenter = ((XHomeRemote)getApplication()).getOutletListPresenter(this);
         mPresenter.getOutlets();
+    }
+
+    /**
+     * @author  Martin J. J.
+     * @since   11/20/2019
+     * @status  Done
+     */
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
     /**
@@ -104,6 +116,8 @@ public class OutletListActivity extends BaseActivity implements IOutletListView,
         });
         return true;
     }
+
+
 
     /**
      * Filter received outlets according to the Search query
